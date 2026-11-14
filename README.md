@@ -45,6 +45,10 @@ page calls itself "Tower Drop", after your server.
 * The page is called "`<server name>` Drop", with the name read live from Unraid.
 * Screenshots straight from the clipboard with Ctrl+V; pictures with a preview,
   a large view and *Copy* into the clipboard of another computer.
+* Text files (txt, md, json, …): *Copy* puts their whole content into the
+  clipboard.
+* A live room: video or voice for up to 10 people, straight from device to
+  device — with a preview in the tile, photos and recording.
 * 17 languages, picked from the browser.
 * Five colour layouts — teal, gold, blue, violet, coral — each in light and dark.
 * Optional users: up to five, each with a PIN, an area of their own next to the

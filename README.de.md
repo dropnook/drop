@@ -46,6 +46,10 @@ Seite nennt sich nach deinem Server „Tower Drop“.
 * Die Seite heisst „`<Servername>` Drop“, der Name kommt live aus Unraid.
 * Screenshots direkt aus der Zwischenablage mit Strg+V; Bilder mit Vorschau,
   Grossansicht und *Kopieren* in die Zwischenablage eines anderen Computers.
+* Textdateien (txt, md, json, …): *Kopieren* legt ihren ganzen Inhalt in die
+  Zwischenablage.
+* Ein Live-Raum: Video oder nur Ton für bis zu 10 Personen, direkt von Gerät zu
+  Gerät — mit Vorschau in der Kachel, Fotos und Aufnahme.
 * 17 Sprachen, automatisch nach dem Browser.
 * Fünf Farb-Layouts — Türkis, Gold, Blau, Violett, Koralle — jedes hell und dunkel.
 * Benutzer, wenn du willst: bis zu fünf, jeder mit PIN, einem eigenen Bereich
