@@ -1,4 +1,4 @@
-/* dropnook.app — one stylesheet, no web fonts. Light and dark follow the system,
+/* drop.dropnook.app — one stylesheet, no web fonts. Light and dark follow the system,
    unless the ☀/☾ switch set data-theme on <html> (theme.js). */
 :root{
   --bg:#F4F7F8; --surface:#FFFFFF; --band:#EAF1F2; --ink:#121B21; --ink-2:#33434C; --muted:#5A6B75;
@@ -102,7 +102,7 @@ h1{font-size:clamp(2.3rem, 5.2vw, 3.7rem); font-weight:780; letter-spacing:-.03e
            border:1px solid var(--line); transition:transform .2s}
 .hero-shot:hover{transform:translateY(-2px)}
 
-/* ---------------------------------------------------------------- Why: usually ✗ / with Dropnook ✓ */
+/* ---------------------------------------------------------------- Why: usually ✗ / with Drop ✓ */
 .vh{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
 .why{max-width:980px; margin:34px auto 0; background:var(--surface); border:1px solid var(--line);
      border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow)}

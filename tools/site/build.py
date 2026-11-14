@@ -1,4 +1,4 @@
-"""Builds the product site dropnook.dropnook.app from page.html and text.json:
+"""Builds the product site drop.dropnook.app from page.html and text.json:
 
     python3 tools/site/build.py
 
@@ -15,9 +15,9 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 DOCS = HERE.parents[1] / "docs"
-SITE = "https://dropnook.dropnook.app/"
-REPO = "https://github.com/dropnook/dropnook.app"
-WHY = 9      # rows w1..w9 in "Why Dropnook?"
+SITE = "https://drop.dropnook.app/"
+REPO = "https://github.com/dropnook/drop"
+WHY = 9      # rows w1..w9 in "Why Drop?"
 FEATURES = 9  # cards f1..f9
 FAQ = 7       # q1..q7
 SHOTS = ["1-overview", "2-share", "3-shares", "4-public", "5-phone", "6-languages", "7-theme",
@@ -37,7 +37,7 @@ def jsonld(lang: str, t: dict, url: str) -> str:
         {
             "@type": "SoftwareApplication",
             "@id": SITE + "#software",
-            "name": "Dropnook",
+            "name": "Drop",
             "description": plain(t["meta.description"]),
             "url": url,
             "inLanguage": lang,
@@ -68,7 +68,7 @@ def jsonld(lang: str, t: dict, url: str) -> str:
         {
             "@type": "WebSite",
             "@id": SITE + "#site",
-            "name": "Dropnook",
+            "name": "Drop",
             "url": SITE,
             "inLanguage": ["en", "de"],
         },

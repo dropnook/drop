@@ -6,7 +6,7 @@
   </picture>
 </h1>
 
-**English** · [Deutsch](README.de.md) · [dropnook.dropnook.app](https://dropnook.dropnook.app/)
+**English** · [Deutsch](README.de.md) · [drop.dropnook.app](https://drop.dropnook.app/)
 
 **Instant sharing for your home network — like AirDrop, but for every
 device.** Get a text or a file from your phone to your PC, from Windows to a
@@ -18,26 +18,26 @@ Something has to leave the house? Share a single file or text through a link
 that expires by itself, optionally with a password. It is served by a second,
 locked-down container — Drop itself is never reachable from the internet.
 
-*Dropnook™* is the project's name; on your devices it is simply *Drop* — the
-page calls itself "Tower Drop", after your server.
+*Drop* is made by [dropnook](https://dropnook.app/). On your devices the page
+calls itself "Tower Drop", after your server.
 
 <p align="center">
-  <a href="https://dropnook.dropnook.app/gallery/"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/slideshow-dark.webp"><img src="docs/screenshots/slideshow-light.webp" alt="Drop in pictures: text fields and files, sharing to the internet, what is public, the recipient's page, the phone layout, other languages, light and dark, five colours, users with their own area" width="100%"></picture></a>
+  <a href="https://drop.dropnook.app/gallery/"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/slideshow-dark.webp"><img src="docs/screenshots/slideshow-light.webp" alt="Drop in pictures: text fields and files, sharing to the internet, what is public, the recipient's page, the phone layout, other languages, light and dark, five colours, users with their own area" width="100%"></picture></a>
 </p>
 
 <p align="center">
-  <a href="https://dropnook.dropnook.app/gallery/#1" title="Text and files"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/1-overview-dark-thumb.webp"><img src="docs/screenshots/1-overview-light-thumb.webp" alt="Text and files" width="32%"></picture></a>
-  <a href="https://dropnook.dropnook.app/gallery/#2" title="Sharing"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/2-share-dark-thumb.webp"><img src="docs/screenshots/2-share-light-thumb.webp" alt="Sharing" width="32%"></picture></a>
-  <a href="https://dropnook.dropnook.app/gallery/#3" title="What is public"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/3-shares-dark-thumb.webp"><img src="docs/screenshots/3-shares-light-thumb.webp" alt="What is public" width="32%"></picture></a>
-  <a href="https://dropnook.dropnook.app/gallery/#4" title="Recipient's view"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/4-public-dark-thumb.webp"><img src="docs/screenshots/4-public-light-thumb.webp" alt="Recipient's view" width="32%"></picture></a>
-  <a href="https://dropnook.dropnook.app/gallery/#5" title="Phone"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/5-phone-dark-thumb.webp"><img src="docs/screenshots/5-phone-light-thumb.webp" alt="Phone" width="32%"></picture></a>
-  <a href="https://dropnook.dropnook.app/gallery/#6" title="17 languages"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/6-languages-dark-thumb.webp"><img src="docs/screenshots/6-languages-light-thumb.webp" alt="17 languages" width="32%"></picture></a>
-  <a href="https://dropnook.dropnook.app/gallery/#7" title="Light and dark"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/7-theme-dark-thumb.webp"><img src="docs/screenshots/7-theme-light-thumb.webp" alt="Light and dark" width="32%"></picture></a>
-  <a href="https://dropnook.dropnook.app/gallery/#8" title="Five colours"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/8-colours-dark-thumb.webp"><img src="docs/screenshots/8-colours-light-thumb.webp" alt="Five colours" width="32%"></picture></a>
-  <a href="https://dropnook.dropnook.app/gallery/#9" title="Users"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/9-users-dark-thumb.webp"><img src="docs/screenshots/9-users-light-thumb.webp" alt="Users" width="32%"></picture></a>
+  <a href="https://drop.dropnook.app/gallery/#1" title="Text and files"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/1-overview-dark-thumb.webp"><img src="docs/screenshots/1-overview-light-thumb.webp" alt="Text and files" width="32%"></picture></a>
+  <a href="https://drop.dropnook.app/gallery/#2" title="Sharing"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/2-share-dark-thumb.webp"><img src="docs/screenshots/2-share-light-thumb.webp" alt="Sharing" width="32%"></picture></a>
+  <a href="https://drop.dropnook.app/gallery/#3" title="What is public"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/3-shares-dark-thumb.webp"><img src="docs/screenshots/3-shares-light-thumb.webp" alt="What is public" width="32%"></picture></a>
+  <a href="https://drop.dropnook.app/gallery/#4" title="Recipient's view"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/4-public-dark-thumb.webp"><img src="docs/screenshots/4-public-light-thumb.webp" alt="Recipient's view" width="32%"></picture></a>
+  <a href="https://drop.dropnook.app/gallery/#5" title="Phone"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/5-phone-dark-thumb.webp"><img src="docs/screenshots/5-phone-light-thumb.webp" alt="Phone" width="32%"></picture></a>
+  <a href="https://drop.dropnook.app/gallery/#6" title="17 languages"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/6-languages-dark-thumb.webp"><img src="docs/screenshots/6-languages-light-thumb.webp" alt="17 languages" width="32%"></picture></a>
+  <a href="https://drop.dropnook.app/gallery/#7" title="Light and dark"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/7-theme-dark-thumb.webp"><img src="docs/screenshots/7-theme-light-thumb.webp" alt="Light and dark" width="32%"></picture></a>
+  <a href="https://drop.dropnook.app/gallery/#8" title="Five colours"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/8-colours-dark-thumb.webp"><img src="docs/screenshots/8-colours-light-thumb.webp" alt="Five colours" width="32%"></picture></a>
+  <a href="https://drop.dropnook.app/gallery/#9" title="Users"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/9-users-dark-thumb.webp"><img src="docs/screenshots/9-users-light-thumb.webp" alt="Users" width="32%"></picture></a>
 </p>
 
-<p align="center"><sub><a href="https://dropnook.dropnook.app/gallery/">Open the gallery</a> — browse with arrows, zoom in with a click.</sub></p>
+<p align="center"><sub><a href="https://drop.dropnook.app/gallery/">Open the gallery</a> — browse with arrows, zoom in with a click.</sub></p>
 
 * Text fields with word, character and link counts; unsaved text survives
   reloads and lost connections.
@@ -101,7 +101,7 @@ listed under [What Drop expects from your reverse proxy](#what-drop-expects-from
 
 > **Only in your network, without sharing to the internet?** Then one container
 > is enough: in Unraid's *Apps* tab (Community Applications), search for
-> **Dropnook** and install it. It runs `drop` alone with `SHARING=off` — no
+> **dropnook** and install *Drop*. It runs `drop` alone with `SHARING=off` — no
 > second address, no reverse proxy, no domain. Drop gets an address of its own
 > in your network (network type *Custom: br0*; put a free address into *Fixed
 > IP address*) and opens at `http://<that address>/`. Rather *Bridge*? Then
@@ -143,11 +143,11 @@ On the new stack, **Edit Stack**:
 
 1. Tab **Compose**: paste the content of
    [`compose-projects-drop/compose.yaml`](compose-projects-drop/compose.yaml)
-   ([raw](https://raw.githubusercontent.com/dropnook/dropnook.app/main/compose-projects-drop/compose.yaml))
+   ([raw](https://raw.githubusercontent.com/dropnook/drop/main/compose-projects-drop/compose.yaml))
    — as it is, there is nothing to change in it.
 2. Tab **.env**: paste the content of
    [`compose-projects-drop/.env.example`](compose-projects-drop/.env.example)
-   ([raw](https://raw.githubusercontent.com/dropnook/dropnook.app/main/compose-projects-drop/.env.example))
+   ([raw](https://raw.githubusercontent.com/dropnook/drop/main/compose-projects-drop/.env.example))
    and fill in your values ([what the `.env` is for](#what-the-env-is-for)):
 
 | Value | Preset | What to do |
@@ -171,14 +171,14 @@ Comments go on lines of their own, never behind a value. The image is
 its icon:
 
 ```
-https://raw.githubusercontent.com/dropnook/dropnook.app/main/.github/icons/drop.png
+https://raw.githubusercontent.com/dropnook/drop/main/.github/icons/drop.png
 ```
 
 Or paste this into the Unraid terminal (**>_** at the top right of the web
 interface), then reload the page:
 
 ```sh
-d=/boot/config/plugins/compose.manager/projects/drop; [ -d "$d" ] && printf '%s' https://raw.githubusercontent.com/dropnook/dropnook.app/main/.github/icons/drop.png > "$d/icon_url" && echo "Icon set" || echo "No stack 'drop' found"
+d=/boot/config/plugins/compose.manager/projects/drop; [ -d "$d" ] && printf '%s' https://raw.githubusercontent.com/dropnook/drop/main/.github/icons/drop.png > "$d/icon_url" && echo "Icon set" || echo "No stack 'drop' found"
 ```
 
 ### 4. Start the stack
@@ -439,7 +439,7 @@ system; ☀ and ☾ next to *Help* pick one by hand, a second click on the chose
 one goes back to automatic. Each browser remembers both. With
 [users](#users-optional), the colour is the user's.
 
-<p align="center"><a href="https://dropnook.dropnook.app/gallery/#8"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/8-colours-dark.webp"><img src="docs/screenshots/8-colours-light.webp" alt="Drop on five phones, one in each colour: teal, gold, blue, violet and coral" width="80%"></picture></a></p>
+<p align="center"><a href="https://drop.dropnook.app/gallery/#8"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/8-colours-dark.webp"><img src="docs/screenshots/8-colours-light.webp" alt="Drop on five phones, one in each colour: teal, gold, blue, violet and coral" width="80%"></picture></a></p>
 
 **Times** are shown in each viewer's own time zone; nothing to set.
 
@@ -527,7 +527,7 @@ A user without a PIN of their own signs in with `PIN`, if that is set;
 otherwise their name alone does, and anyone in your network can open that
 area — fine for a living-room TV, not for something private.
 
-<p align="center"><a href="https://dropnook.dropnook.app/gallery/#9"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/9-users-dark.webp"><img src="docs/screenshots/9-users-light.webp" alt="Tom's own area in gold, next to the sign-in page with five names" width="80%"></picture></a></p>
+<p align="center"><a href="https://drop.dropnook.app/gallery/#9"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/9-users-dark.webp"><img src="docs/screenshots/9-users-light.webp" alt="Tom's own area in gold, next to the sign-in page with five names" width="80%"></picture></a></p>
 
 ## Troubleshooting
 
@@ -597,16 +597,14 @@ typing; unsaved text is sent once the connection is back.
   More than about 10 people with video is more than phones like: every one of
   them sends its picture to every other one.
 
-## Support Dropnook
+## Support Drop
 
-If Dropnook is useful to you, you can say thanks
-with a donation: **[paypal.me/dropnook](https://paypal.me/dropnook)**. Ideally 5 € (or $5, 5 CHF)
-or more — PayPal keeps a fixed fee plus a few percent of every payment, so of a
-single euro hardly anything arrives.
+If Drop is useful to you, you can say thanks with a donation:
+**[paypal.me/dropnook](https://paypal.me/dropnook)**.
 
 ---
 
 <sub>All settings, building the image yourself and releasing:
-[docs/DEVELOPMENT.md](docs/DEVELOPMENT.md). Dropnook is free software under the
+[docs/DEVELOPMENT.md](docs/DEVELOPMENT.md). Drop is free software under the
 [GNU Affero General Public License v3.0](LICENSE); the name Dropnook™ is not
 part of that license — see [TRADEMARKS.md](TRADEMARKS.md).</sub>

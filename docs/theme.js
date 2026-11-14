@@ -1,4 +1,4 @@
-// Light, dark or automatic (as the system) on dropnook.app: the ☀/☾ switch in the
+// Light, dark or automatic (as the system) on drop.dropnook.app: the ☀/☾ switch in the
 // header. Loaded in <head>, so a page never shows in the wrong colours first.
 // A click picks one; a second click on it goes back to automatic.
 (() => {

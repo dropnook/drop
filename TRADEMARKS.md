@@ -1,6 +1,6 @@
 # The Dropnook™ name
 
-The code of Dropnook is free software under the
+The code of Drop is free software under the
 [GNU Affero General Public License v3.0](LICENSE). That license covers the
 code — not the name **Dropnook™** or its logo, which identify this project
 and its official releases. (AGPL-3.0, section 7(e), allows exactly this.)
@@ -20,6 +20,6 @@ and its official releases. (AGPL-3.0, section 7(e), allows exactly this.)
 * suggest that the project endorses you or your product when it does not.
 
 Forks are welcome — pick a name of your own and mention that it is based on
-Dropnook, with a link to <https://github.com/dropnook/dropnook.app>.
+Dropnook, with a link to <https://github.com/dropnook/drop>.
 
 If you are unsure, open an issue and ask.

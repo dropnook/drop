@@ -1,4 +1,4 @@
-# Dropnook — for developers and power users
+# Drop — for developers and power users
 
 The [README](../README.md) covers installing and using Drop with Unraid's
 Compose Manager Plus. This page has the rest.
@@ -267,7 +267,7 @@ requests.
 
 ## Website, screenshots and gallery
 
-The product site [dropnook.dropnook.app](https://dropnook.dropnook.app/) is the `docs/` folder,
+The product site [drop.dropnook.app](https://drop.dropnook.app/) is the `docs/` folder,
 served as it is by Cloudflare: Workers Builds runs `npx wrangler deploy` on
 every push to `main`, and [`wrangler.jsonc`](../wrangler.jsonc) says to publish
 `docs/` as static files — no build command. Cloudflare builds on pushes only:
