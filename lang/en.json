@@ -11,6 +11,8 @@
   "ui.show_image": "Show large",
   "ui.copy_image": "Copy picture",
   "ui.image_copied": "Picture copied",
+  "ui.copy_text": "Copy content",
+  "ui.text_copied": "Content copied.",
   "ui.image_copy_failed": "Copying did not work — open the picture and use the browser's “Copy image”.",
   "ui.image_copy_needs_https": "Copying pictures needs HTTPS. Open the picture and use the browser's “Copy image”.",
   "ui.image_too_large": "Too large to copy — download it instead.",

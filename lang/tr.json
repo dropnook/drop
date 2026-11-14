@@ -10,6 +10,8 @@
   "ui.show_image": "Büyük göster",
   "ui.copy_image": "Görseli kopyala",
   "ui.image_copied": "Görsel kopyalandı",
+  "ui.copy_text": "İçeriği kopyala",
+  "ui.text_copied": "İçerik kopyalandı.",
   "ui.image_copy_failed": "Kopyalanamadı — görseli açın ve tarayıcıda “Resmi kopyala”yı seçin.",
   "ui.image_copy_needs_https": "Görsel kopyalamak için HTTPS gerekir. Görseli açın ve tarayıcıda “Resmi kopyala”yı seçin.",
   "ui.image_too_large": "Kopyalamak için çok büyük — indirin.",

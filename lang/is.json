@@ -10,6 +10,8 @@
   "ui.show_image": "Sýna stórt",
   "ui.copy_image": "Afrita mynd",
   "ui.image_copied": "Mynd afrituð",
+  "ui.copy_text": "Afrita innihald",
+  "ui.text_copied": "Innihald afritað.",
   "ui.image_copy_failed": "Afritun tókst ekki — opnaðu myndina og notaðu „Afrita mynd“ í vafranum.",
   "ui.image_copy_needs_https": "Til að afrita myndir þarf HTTPS. Opnaðu myndina og notaðu „Afrita mynd“ í vafranum.",
   "ui.image_too_large": "Of stór til að afrita — sæktu hana í staðinn.",

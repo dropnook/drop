@@ -10,6 +10,8 @@
   "ui.show_image": "放大查看",
   "ui.copy_image": "复制图片",
   "ui.image_copied": "图片已复制",
+  "ui.copy_text": "复制内容",
+  "ui.text_copied": "内容已复制。",
   "ui.image_copy_failed": "复制失败——请打开图片，使用浏览器的“复制图片”。",
   "ui.image_copy_needs_https": "复制图片需要 HTTPS。请打开图片，使用浏览器的“复制图片”。",
   "ui.image_too_large": "文件太大，无法复制——请下载。",

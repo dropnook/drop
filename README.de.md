@@ -46,6 +46,10 @@ Seite nennt sich nach deinem Server „Tower Drop“.
 * Die Seite heisst „`<Servername>` Drop“, der Name kommt live aus Unraid.
 * Screenshots direkt aus der Zwischenablage mit Strg+V; Bilder mit Vorschau,
   Grossansicht und *Kopieren* in die Zwischenablage eines anderen Computers.
+* Textdateien (txt, md, json, …): *Kopieren* legt ihren ganzen Inhalt in die
+  Zwischenablage.
+* Ein Live-Raum: Video oder nur Ton für bis zu 10 Personen, direkt von Gerät zu
+  Gerät — mit Vorschau in der Kachel, Fotos und Aufnahme.
 * 17 Sprachen, automatisch nach dem Browser.
 * Fünf Farb-Layouts — Türkis, Gold, Blau, Violett, Koralle — jedes hell und dunkel.
 * Benutzer, wenn du willst: bis zu fünf, jeder mit PIN, einem eigenen Bereich
@@ -386,7 +390,10 @@ oder Wischen zum nächsten). *Kopieren* legt das Bild selbst in die
 Zwischenablage — bereit zum Einfügen in einen Chat, eine Mail oder ein
 Dokument. Das braucht [HTTPS](#https-im-heimnetz); ohne geht es per Rechtsklick
 auf das grosse Bild und *Bild kopieren* im Browser. iPhone-Fotos (HEIC) werden
-wie jede Datei abgelegt, bekommen aber kein Vorschaubild.
+wie jede Datei abgelegt, bekommen aber kein Vorschaubild. Textdateien (txt, md,
+json, yaml, …, bis 2 MB) haben ebenfalls *Kopieren* — in der Liste, im Menü und
+über der Vorschau, die ein Klick auf den Namen zeigt: Es legt den ganzen Inhalt
+in die Zwischenablage, auch ohne HTTPS.
 
 **Teilen** — *Teilen* bei einem Textfeld oder *Im Internet teilen…* im Menü
 einer Datei: wählen, wie lange der Link gilt (15 Minuten bis 30 Tage), auf

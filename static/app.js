@@ -1190,6 +1190,10 @@ function uploadRow(u) {
 const THUMB_TYPES = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp', 'avif'];
 const extOf    = (name) => (name.includes('.') ? name.split('.').pop().toLowerCase() : '');
 const isImage  = (d) => THUMB_TYPES.includes(extOf(d.name)) || extOf(d.name) === 'svg';
+// Files shown as text in the properties, and whose content "Copy" takes.
+const TEXT_TYPES = ['txt', 'md', 'csv', 'log', 'json', 'yaml', 'yml', 'xml', 'ini', 'conf', 'py', 'js', 'sh'];
+const TEXT_MAX   = 2 * 1024 * 1024;
+const isText     = (d) => TEXT_TYPES.includes(extOf(d.name)) && d.size < TEXT_MAX;
 // Loaded by <img> and <a download>, which send no x-drop-as: say it in the address.
 const asOpened = (url) => (openedAs ? url + (url.includes('?') ? '&' : '?') + 'as=' + openedAs : url);
 const fileUrl  = (name) => asOpened(withArea('/files/' + encodeURIComponent(name)));
@@ -1266,11 +1270,12 @@ function fileRow(d) {
   }
   main.appendChild(meta);
   body.appendChild(main);
-  if (image) {
+  const text = !image && isText(d);
+  if (image || text) {
     const copy = smallButton(t('ui.copy'));
     copy.classList.add('copy-image');
-    copy.title = t('ui.copy_image');
-    copy.onclick = (e) => { e.stopPropagation(); copyImage(d); };
+    copy.title = t(image ? 'ui.copy_image' : 'ui.copy_text');
+    copy.onclick = (e) => { e.stopPropagation(); if (image) copyImage(d); else copyFileText(d); };
     body.appendChild(copy);
   }
   li.appendChild(body);
@@ -1282,6 +1287,7 @@ function fileRow(d) {
       { text: t('ui.show_image'), action: () => showImage(d) },
       { text: t('ui.copy_image'), action: () => copyImage(d) },
     ] : []),
+    ...(text ? [{ text: t('ui.copy_text'), action: () => copyFileText(d) }] : []),
     { text: t('ui.download'), action: () => startDownload([d.name]) },
     { text: t('ui.copy_name'), action: () => copyWithToast(d.name, t('ui.name_copied')) },
     ...(sharingEnabled ? [{ text: t('ui.share_file'), action: () => createShareDialog({ kind: 'file', name: d.name, size: d.size }) }] : []),
@@ -1374,7 +1380,6 @@ async function showProperties(d) {
 
   const ext = d.name.split('.').pop().toLowerCase();
   const images = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'avif', 'svg', 'bmp'];
-  const texts = ['txt', 'md', 'csv', 'log', 'json', 'yaml', 'yml', 'xml', 'ini', 'conf', 'py', 'js', 'sh'];
 
   if (images.includes(ext) && d.size < 40 * 1024 * 1024) {
     const img = document.createElement('img');
@@ -1382,10 +1387,17 @@ async function showProperties(d) {
     img.src = fileUrl(d.name);
     img.alt = d.name;
     box.appendChild(img);
-  } else if (texts.includes(ext) && d.size < 2 * 1024 * 1024) {
+  } else if (isText(d)) {
     try {
       const r = await fetch(withArea('/api/preview/' + encodeURIComponent(d.name)));
-      if (r.ok) box.appendChild(el('pre', 'preview', (await r.json()).text));
+      if (r.ok) {
+        // The preview is the beginning of the file; "Copy" takes all of it.
+        const head = el('div', 'preview-head');
+        const copy = smallButton(t('ui.copy_text'));
+        copy.onclick = () => copyFileText(d);
+        head.appendChild(copy);
+        box.append(head, el('pre', 'preview', (await r.json()).text));
+      }
     } catch (e) { /* no preview, no drama */ }
   }
 
@@ -1554,6 +1566,23 @@ function copyImage(d) {
         toast(t('ui.image_copy_failed'), true);
       }
     });
+}
+
+/* The whole content of a text file into the clipboard — not just the beginning
+   the preview shows. Read as UTF-8, like the preview. */
+function copyFileText(d) {
+  const text = fetch(fileUrl(d.name)).then((r) => { if (!r.ok) throw new Error(r.status); return r.text(); });
+  const plain = () => text.then(toClipboard).then((ok) => toast(t(ok ? 'ui.text_copied' : 'ui.copy_failed'), !ok))
+    .catch(() => toast(t('ui.copy_failed'), true));
+  if (window.isSecureContext && navigator.clipboard && window.ClipboardItem) {
+    // As with pictures: the promise goes in at once, Safari only allows the
+    // write while the click is still "fresh".
+    const blob = text.then((x) => new Blob([x], { type: 'text/plain' }));
+    navigator.clipboard.write([new ClipboardItem({ 'text/plain': blob })])
+      .then(() => toast(t('ui.text_copied')), plain);
+  } else {
+    plain();
+  }
 }
 
 async function asPng(blob) {
