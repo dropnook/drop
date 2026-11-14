@@ -1,5 +1,5 @@
 """Turns the PNGs from slides.mjs and diagram.mjs into the WebP files in docs/,
-plus the bare page light and dark for the slider on dropnook.app (app-*.webp),
+plus the bare page light and dark for the slider on drop.dropnook.app (app-*.webp),
 in each colour layout (app-<colour>-*.webp; teal is app-*.webp).
 
     python3 tools/screenshots/export.py     (WORK as for the other scripts)

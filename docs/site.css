@@ -1,4 +1,4 @@
-/* dropnook.app — one stylesheet, no web fonts. Light and dark follow the system,
+/* drop.dropnook.app — one stylesheet, no web fonts. Light and dark follow the system,
    unless the ☀/☾ switch set data-theme on <html> (theme.js). */
 :root{
   --bg:#F4F7F8; --surface:#FFFFFF; --band:#EAF1F2; --ink:#121B21; --ink-2:#33434C; --muted:#5A6B75;

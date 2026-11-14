@@ -1,4 +1,4 @@
-// The light/dark slider on dropnook.app: drag it, click anywhere, or use the arrow keys.
+// The light/dark slider on drop.dropnook.app: drag it, click anywhere, or use the arrow keys.
 for (const box of document.querySelectorAll('.compare')) {
   const input = box.querySelector('input');
   input.hidden = false;

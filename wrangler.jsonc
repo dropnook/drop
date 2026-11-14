@@ -1,4 +1,4 @@
-// dropnook.app: Cloudflare serves the docs/ folder as it is, no build step.
+// drop.dropnook.app: Cloudflare serves the docs/ folder as it is, no build step.
 // Deployed by Cloudflare Workers Builds on every push to main.
 {
   "name": "dropnook",

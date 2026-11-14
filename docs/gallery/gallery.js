@@ -19,7 +19,7 @@
       keys: 'Click the picture to zoom in, move the mouse to look around · ← → to browse.',
       touch: 'Tap the picture to zoom in, swipe to browse.',
       back: '← Home', home: '../',
-      title: 'Dropnook — screenshots', dir: '../screenshots/', readme: 'https://github.com/dropnook/dropnook.app',
+      title: 'Dropnook — screenshots', dir: '../screenshots/', readme: 'https://github.com/dropnook/drop',
     },
     de: {
       slides: [
@@ -37,7 +37,7 @@
       keys: 'Klick aufs Bild vergrössert, mit der Maus umsehen · ← → zum Blättern.',
       touch: 'Tippen vergrössert, wischen blättert.',
       back: '← Startseite', home: '../de/',
-      title: 'Dropnook — Bilder', dir: '../screenshots/de/', readme: 'https://github.com/dropnook/dropnook.app/blob/main/README.de.md',
+      title: 'Dropnook — Bilder', dir: '../screenshots/de/', readme: 'https://github.com/dropnook/drop/blob/main/README.de.md',
     },
   };
   const params = new URLSearchParams(location.search);

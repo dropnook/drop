@@ -15,15 +15,15 @@ Key facts:
 
 ## Docs
 
-- [README (English)](https://raw.githubusercontent.com/dropnook/dropnook.app/main/README.md): what it is, installation on Unraid step by step, HTTPS, updating, usage, security, troubleshooting
-- [README (Deutsch)](https://raw.githubusercontent.com/dropnook/dropnook.app/main/README.de.md): the same in German
-- [compose.yaml](https://raw.githubusercontent.com/dropnook/dropnook.app/main/compose-projects-drop/compose.yaml): the complete Docker Compose file, a template that takes every personal value from the .env
-- [.env.example](https://raw.githubusercontent.com/dropnook/dropnook.app/main/compose-projects-drop/.env.example): the values to fill in — two IP addresses, folders, HTTPS, PIN, users
-- [Developer notes](https://raw.githubusercontent.com/dropnook/dropnook.app/main/docs/DEVELOPMENT.md): all settings (environment variables), running without Unraid, how it works inside, releases
+- [README (English)](https://raw.githubusercontent.com/dropnook/drop/main/README.md): what it is, installation on Unraid step by step, HTTPS, updating, usage, security, troubleshooting
+- [README (Deutsch)](https://raw.githubusercontent.com/dropnook/drop/main/README.de.md): the same in German
+- [compose.yaml](https://raw.githubusercontent.com/dropnook/drop/main/compose-projects-drop/compose.yaml): the complete Docker Compose file, a template that takes every personal value from the .env
+- [.env.example](https://raw.githubusercontent.com/dropnook/drop/main/compose-projects-drop/.env.example): the values to fill in — two IP addresses, folders, HTTPS, PIN, users
+- [Developer notes](https://raw.githubusercontent.com/dropnook/drop/main/docs/DEVELOPMENT.md): all settings (environment variables), running without Unraid, how it works inside, releases
 
 ## Optional
 
-- [Source code](https://github.com/dropnook/dropnook.app)
-- [Releases](https://github.com/dropnook/dropnook.app/releases)
-- [Name and trademark](https://raw.githubusercontent.com/dropnook/dropnook.app/main/TRADEMARKS.md)
-- [Screenshot gallery](https://dropnook.dropnook.app/gallery/)
+- [Source code](https://github.com/dropnook/drop)
+- [Releases](https://github.com/dropnook/drop/releases)
+- [Name and trademark](https://raw.githubusercontent.com/dropnook/drop/main/TRADEMARKS.md)
+- [Screenshot gallery](https://drop.dropnook.app/gallery/)

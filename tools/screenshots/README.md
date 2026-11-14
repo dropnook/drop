@@ -1,6 +1,6 @@
 # Screenshots and diagram
 
-How the pictures in `docs/` (README, gallery, dropnook.app) are made. Needs Docker, root,
+How the pictures in `docs/` (README, gallery, drop.dropnook.app) are made. Needs Docker, root,
 Node with Playwright (Chromium) and Python with Pillow; the fonts Inter and
 Noto (incl. CJK and Arabic).
 

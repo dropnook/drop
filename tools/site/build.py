@@ -1,4 +1,4 @@
-"""Builds the product site dropnook.dropnook.app from page.html and text.json:
+"""Builds the product site drop.dropnook.app from page.html and text.json:
 
     python3 tools/site/build.py
 
@@ -15,8 +15,8 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 DOCS = HERE.parents[1] / "docs"
-SITE = "https://dropnook.dropnook.app/"
-REPO = "https://github.com/dropnook/dropnook.app"
+SITE = "https://drop.dropnook.app/"
+REPO = "https://github.com/dropnook/drop"
 WHY = 9      # rows w1..w9 in "Why Dropnook?"
 FEATURES = 9  # cards f1..f9
 FAQ = 7       # q1..q7

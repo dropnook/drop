@@ -6,7 +6,7 @@
   </picture>
 </h1>
 
-[English](README.md) · **Deutsch** · [dropnook.dropnook.app](https://dropnook.dropnook.app/de/)
+[English](README.md) · **Deutsch** · [drop.dropnook.app](https://drop.dropnook.app/de/)
 
 **Instant-Share fürs Heimnetz — wie AirDrop, nur für jedes Gerät.** Einen
 Text oder eine Datei vom Handy auf den PC bringen, von Windows zum Mac, von
@@ -23,22 +23,22 @@ erreichbar.
 Seite nennt sich nach deinem Server „Tower Drop“.
 
 <p align="center">
-  <a href="https://dropnook.dropnook.app/gallery/?lang=de"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/slideshow-dark.webp"><img src="docs/screenshots/de/slideshow-light.webp" alt="Drop in Bildern: Textfelder und Dateien, Teilen ins Internet, was öffentlich ist, die Seite des Empfängers, die Ansicht auf dem Handy, andere Sprachen, hell und dunkel, fünf Farben, Benutzer mit eigenem Bereich" width="100%"></picture></a>
+  <a href="https://drop.dropnook.app/gallery/?lang=de"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/slideshow-dark.webp"><img src="docs/screenshots/de/slideshow-light.webp" alt="Drop in Bildern: Textfelder und Dateien, Teilen ins Internet, was öffentlich ist, die Seite des Empfängers, die Ansicht auf dem Handy, andere Sprachen, hell und dunkel, fünf Farben, Benutzer mit eigenem Bereich" width="100%"></picture></a>
 </p>
 
 <p align="center">
-  <a href="https://dropnook.dropnook.app/gallery/?lang=de#1" title="Text und Dateien"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/1-overview-dark-thumb.webp"><img src="docs/screenshots/de/1-overview-light-thumb.webp" alt="Text und Dateien" width="32%"></picture></a>
-  <a href="https://dropnook.dropnook.app/gallery/?lang=de#2" title="Teilen"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/2-share-dark-thumb.webp"><img src="docs/screenshots/de/2-share-light-thumb.webp" alt="Teilen" width="32%"></picture></a>
-  <a href="https://dropnook.dropnook.app/gallery/?lang=de#3" title="Was öffentlich ist"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/3-shares-dark-thumb.webp"><img src="docs/screenshots/de/3-shares-light-thumb.webp" alt="Was öffentlich ist" width="32%"></picture></a>
-  <a href="https://dropnook.dropnook.app/gallery/?lang=de#4" title="Ansicht des Empfängers"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/4-public-dark-thumb.webp"><img src="docs/screenshots/de/4-public-light-thumb.webp" alt="Ansicht des Empfängers" width="32%"></picture></a>
-  <a href="https://dropnook.dropnook.app/gallery/?lang=de#5" title="Handy"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/5-phone-dark-thumb.webp"><img src="docs/screenshots/de/5-phone-light-thumb.webp" alt="Handy" width="32%"></picture></a>
-  <a href="https://dropnook.dropnook.app/gallery/?lang=de#6" title="17 Sprachen"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/6-languages-dark-thumb.webp"><img src="docs/screenshots/de/6-languages-light-thumb.webp" alt="17 Sprachen" width="32%"></picture></a>
-  <a href="https://dropnook.dropnook.app/gallery/?lang=de#7" title="Hell und dunkel"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/7-theme-dark-thumb.webp"><img src="docs/screenshots/de/7-theme-light-thumb.webp" alt="Hell und dunkel" width="32%"></picture></a>
-  <a href="https://dropnook.dropnook.app/gallery/?lang=de#8" title="Fünf Farben"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/8-colours-dark-thumb.webp"><img src="docs/screenshots/de/8-colours-light-thumb.webp" alt="Fünf Farben" width="32%"></picture></a>
-  <a href="https://dropnook.dropnook.app/gallery/?lang=de#9" title="Benutzer"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/9-users-dark-thumb.webp"><img src="docs/screenshots/de/9-users-light-thumb.webp" alt="Benutzer" width="32%"></picture></a>
+  <a href="https://drop.dropnook.app/gallery/?lang=de#1" title="Text und Dateien"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/1-overview-dark-thumb.webp"><img src="docs/screenshots/de/1-overview-light-thumb.webp" alt="Text und Dateien" width="32%"></picture></a>
+  <a href="https://drop.dropnook.app/gallery/?lang=de#2" title="Teilen"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/2-share-dark-thumb.webp"><img src="docs/screenshots/de/2-share-light-thumb.webp" alt="Teilen" width="32%"></picture></a>
+  <a href="https://drop.dropnook.app/gallery/?lang=de#3" title="Was öffentlich ist"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/3-shares-dark-thumb.webp"><img src="docs/screenshots/de/3-shares-light-thumb.webp" alt="Was öffentlich ist" width="32%"></picture></a>
+  <a href="https://drop.dropnook.app/gallery/?lang=de#4" title="Ansicht des Empfängers"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/4-public-dark-thumb.webp"><img src="docs/screenshots/de/4-public-light-thumb.webp" alt="Ansicht des Empfängers" width="32%"></picture></a>
+  <a href="https://drop.dropnook.app/gallery/?lang=de#5" title="Handy"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/5-phone-dark-thumb.webp"><img src="docs/screenshots/de/5-phone-light-thumb.webp" alt="Handy" width="32%"></picture></a>
+  <a href="https://drop.dropnook.app/gallery/?lang=de#6" title="17 Sprachen"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/6-languages-dark-thumb.webp"><img src="docs/screenshots/de/6-languages-light-thumb.webp" alt="17 Sprachen" width="32%"></picture></a>
+  <a href="https://drop.dropnook.app/gallery/?lang=de#7" title="Hell und dunkel"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/7-theme-dark-thumb.webp"><img src="docs/screenshots/de/7-theme-light-thumb.webp" alt="Hell und dunkel" width="32%"></picture></a>
+  <a href="https://drop.dropnook.app/gallery/?lang=de#8" title="Fünf Farben"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/8-colours-dark-thumb.webp"><img src="docs/screenshots/de/8-colours-light-thumb.webp" alt="Fünf Farben" width="32%"></picture></a>
+  <a href="https://drop.dropnook.app/gallery/?lang=de#9" title="Benutzer"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/9-users-dark-thumb.webp"><img src="docs/screenshots/de/9-users-light-thumb.webp" alt="Benutzer" width="32%"></picture></a>
 </p>
 
-<p align="center"><sub><a href="https://dropnook.dropnook.app/gallery/?lang=de">Galerie öffnen</a> — mit Pfeilen blättern, mit einem Klick hineinzoomen.</sub></p>
+<p align="center"><sub><a href="https://drop.dropnook.app/gallery/?lang=de">Galerie öffnen</a> — mit Pfeilen blättern, mit einem Klick hineinzoomen.</sub></p>
 
 * Textfelder mit Wort-, Zeichen- und Linkzählung; ungespeicherter Text übersteht
   Neuladen und Verbindungsabbrüche.
@@ -147,11 +147,11 @@ Beim neuen Stack **Edit Stack**:
 
 1. Reiter **Compose**: den Inhalt von
    [`compose-projects-drop/compose.yaml`](compose-projects-drop/compose.yaml)
-   ([roh](https://raw.githubusercontent.com/dropnook/dropnook.app/main/compose-projects-drop/compose.yaml))
+   ([roh](https://raw.githubusercontent.com/dropnook/drop/main/compose-projects-drop/compose.yaml))
    einfügen — so, wie er ist; darin gibt es nichts zu ändern.
 2. Reiter **.env**: den Inhalt von
    [`compose-projects-drop/.env.example`](compose-projects-drop/.env.example)
-   ([roh](https://raw.githubusercontent.com/dropnook/dropnook.app/main/compose-projects-drop/.env.example))
+   ([roh](https://raw.githubusercontent.com/dropnook/drop/main/compose-projects-drop/.env.example))
    einfügen und deine Werte eintragen ([wozu die `.env`](#wozu-die-env)):
 
 | Wert | Vorgabe | Was zu tun ist |
@@ -175,14 +175,14 @@ Kommentare stehen auf eigenen Zeilen, nie hinter einem Wert. Das Image ist
 sein Symbol:
 
 ```
-https://raw.githubusercontent.com/dropnook/dropnook.app/main/.github/icons/drop.png
+https://raw.githubusercontent.com/dropnook/drop/main/.github/icons/drop.png
 ```
 
 Oder das hier ins Unraid-Terminal einfügen (**>_** oben rechts in der
 Weboberfläche), danach die Seite neu laden:
 
 ```sh
-d=/boot/config/plugins/compose.manager/projects/drop; [ -d "$d" ] && printf '%s' https://raw.githubusercontent.com/dropnook/dropnook.app/main/.github/icons/drop.png > "$d/icon_url" && echo "Symbol gesetzt" || echo "Kein Stack 'drop' gefunden"
+d=/boot/config/plugins/compose.manager/projects/drop; [ -d "$d" ] && printf '%s' https://raw.githubusercontent.com/dropnook/drop/main/.github/icons/drop.png > "$d/icon_url" && echo "Symbol gesetzt" || echo "Kein Stack 'drop' gefunden"
 ```
 
 ### 4. Den Stack starten
@@ -456,7 +456,7 @@ dem System; mit ☀ und ☾ neben *Hilfe* wählst du von Hand, ein zweiter Klick
 die gewählte Seite stellt wieder auf automatisch. Jeder Browser merkt sich
 beides. Mit [Benutzern](#benutzer-optional) ist die Farbe die des Benutzers.
 
-<p align="center"><a href="https://dropnook.dropnook.app/gallery/?lang=de#8"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/8-colours-dark.webp"><img src="docs/screenshots/de/8-colours-light.webp" alt="Drop auf fünf Handys, jedes in einer Farbe: Türkis, Gold, Blau, Violett und Koralle" width="80%"></picture></a></p>
+<p align="center"><a href="https://drop.dropnook.app/gallery/?lang=de#8"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/8-colours-dark.webp"><img src="docs/screenshots/de/8-colours-light.webp" alt="Drop auf fünf Handys, jedes in einer Farbe: Türkis, Gold, Blau, Violett und Koralle" width="80%"></picture></a></p>
 
 **Zeiten** zeigt jeder Browser in seiner eigenen Zeitzone; nichts einzustellen.
 
@@ -549,7 +549,7 @@ meldet nur diesen Benutzer ab. Wer keine eigene PIN hat, meldet sich mit `PIN`
 an, falls gesetzt; sonst genügt sein Name, und jeder im Netz kann diesen
 Bereich öffnen — gut für den Fernseher im Wohnzimmer, nicht für Privates.
 
-<p align="center"><a href="https://dropnook.dropnook.app/gallery/?lang=de#9"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/9-users-dark.webp"><img src="docs/screenshots/de/9-users-light.webp" alt="Toms eigener Bereich in Gold, daneben die Anmeldung mit fünf Namen" width="80%"></picture></a></p>
+<p align="center"><a href="https://drop.dropnook.app/gallery/?lang=de#9"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/9-users-dark.webp"><img src="docs/screenshots/de/9-users-light.webp" alt="Toms eigener Bereich in Gold, daneben die Anmeldung mit fünf Namen" width="80%"></picture></a></p>
 
 ## Wenn etwas nicht geht
 

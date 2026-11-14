@@ -1,4 +1,4 @@
-// The social preview card (GitHub "Social preview", og:image of dropnook.app):
+// The social preview card (GitHub "Social preview", og:image of drop.dropnook.app):
 //   node social.mjs   → docs/social-preview.png, 1280×640 (SCHEME=light for the light one)
 import { createRequire } from 'module';
 import { readFileSync, writeFileSync } from 'fs';
