@@ -241,7 +241,9 @@ To release: *Actions* → *Image* → *Run workflow* on `main`, enter the versio
 (e.g. `1.2.3`). The workflow builds and publishes the images, then creates the
 tag `v1.2.3` and its GitHub release. Release notes, if any, go into
 `.github/release-notes/v1.2.3.md` beforehand; they are put above the generated
-changelog. Releases cannot be changed once published (release immutability is
+changelog. Keep them short: one title line, a few bullets saying what is new for
+the person using Drop, the update line — no test results, no internals; the
+same goes for pull request descriptions. Releases cannot be changed once published (release immutability is
 on). A release published by hand on the *Releases* page builds the same images.
 
 The image is `ghcr.io/dropnook/dropnook`, in a fork
