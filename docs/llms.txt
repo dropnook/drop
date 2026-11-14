@@ -4,7 +4,7 @@
 
 Key facts:
 
-- Two containers from one image (ghcr.io/dropnook/dropnook): `drop` (the drop box, LAN only, refuses anything coming through a proxy) and `drop-share` (share links only; non-root, read-only file system, no Linux capabilities, sees only the shared items).
+- Two containers from one image (ghcr.io/dropnook/drop): `drop` (the drop box, LAN only, refuses anything coming through a proxy) and `drop-share` (share links only; non-root, read-only file system, no Linux capabilities, sees only the shared items).
 - Share links look like https://drop-share.yourdomain.com/k7m3x-9pq2r — 10 characters, no look-alike characters, about 50 bits; they expire after 15 minutes to 30 days.
 - HTTPS in the LAN with an existing certificate (e.g. from Nginx Proxy Manager), found automatically.
 - Picture previews, a large view and "Copy" of a picture into another computer's clipboard; "Copy" of a text file's whole content.

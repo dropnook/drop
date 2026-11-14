@@ -205,7 +205,7 @@ Unraid and can stay.
 ## Building the image yourself
 
 ```sh
-docker build -t ghcr.io/dropnook/dropnook:local .
+docker build -t ghcr.io/dropnook/drop:local .
 ```
 
 Then `DROPNOOK_VERSION=local` in the `.env`. To try changes without
@@ -246,10 +246,13 @@ the person using Drop, the update line — no test results, no internals; the
 same goes for pull request descriptions. Releases cannot be changed once published (release immutability is
 on). A release published by hand on the *Releases* page builds the same images.
 
-The image is `ghcr.io/dropnook/dropnook`, in a fork
-`ghcr.io/<your account>/dropnook`. The very first image is
-private on GitHub: set it to public once under *Packages → dropnook →
-Package settings → Change visibility*.
+The image is `ghcr.io/dropnook/drop`. Every build is published as
+`ghcr.io/dropnook/dropnook` too, with the same tags and digests: that was the
+name before the app was renamed, and existing installations still pull it, so
+it must never be dropped. In a fork the names are `ghcr.io/<your account>/drop`
+and `…/dropnook`. A package is private when it is first published: set each to
+public once under *Packages → the package → Package settings → Change
+visibility*.
 
 ## License and name
 
