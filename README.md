@@ -1,8 +1,8 @@
 <h1>
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/title-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="docs/title-light.svg">
-    <img src="docs/title.svg" alt="Dropnook" height="44">
+    <source media="(prefers-color-scheme: dark)" srcset="docs/drop-title-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="docs/drop-title-light.svg">
+    <img src="docs/drop-title.svg" alt="Drop" height="44">
   </picture>
 </h1>
 
