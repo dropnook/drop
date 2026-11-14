@@ -156,7 +156,7 @@ Beim neuen Stack **Edit Stack**:
 
 | Wert | Vorgabe | Was zu tun ist |
 |---|---|---|
-| `DROPNOOK_VERSION` | `2` | So lassen — folgt jedem 2.x-Release; eine Nummer wie `2.2.1` hält genau diese Version fest |
+| `DROP_VERSION` | `2` | So lassen — folgt jedem 2.x-Release; eine Nummer wie `2.2.1` hält genau diese Version fest. `DROPNOOK_VERSION` aus einer älteren `.env` gilt weiterhin |
 | `DROP_IP`, `SHARE_IP` | leer | Die zwei freien Adressen **eintragen** |
 | `DATA_DIR` | `/mnt/user/drop` | Nur wenn dein Share anders heisst oder woanders liegt |
 | `APPDATA_DIR` | `/mnt/user/appdata/drop` | Eigene Übersetzungen; darf leer bleiben |
@@ -169,7 +169,7 @@ Beim neuen Stack **Edit Stack**:
 | `PIN`, `USER_…` | leer | Optional — siehe [PIN](#pin-oder-passwort-optional) und [Benutzer](#benutzer-optional) |
 
 Kommentare stehen auf eigenen Zeilen, nie hinter einem Wert. Das Image ist
-`ghcr.io/dropnook/drop`, in der Version `DROPNOOK_VERSION`. Der Container aus
+`ghcr.io/dropnook/drop`, in der Version `DROP_VERSION`. Der Container aus
 Community Applications und früher eingerichtete Stacks verwenden
 `ghcr.io/dropnook/dropnook`: dasselbe Image unter dem früheren Namen, mit
 denselben Updates. Dort musst du nichts ändern.
@@ -327,7 +327,7 @@ In der Unraid-Weboberfläche Reiter *Docker* → Bereich *Compose* → **Check f
 Updates**, danach beim Stack `drop` **Update**.
 Deine Dateien, Texte und Freigaben bleiben, wo sie sind.
 
-`DROPNOOK_VERSION=2` folgt jedem 2.x-Release — Fehlerkorrekturen und neue Sprachen; braucht ein
+`DROP_VERSION=2` folgt jedem 2.x-Release — Fehlerkorrekturen und neue Sprachen; braucht ein
 Release einmal etwas von dir, steht das zuoberst in den Release-Notizen. Ein
 Update ändert weder die
 `compose.yaml` noch die `.env`. Bringt ein Release eine neue `compose.yaml`,

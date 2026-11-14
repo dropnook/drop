@@ -208,7 +208,7 @@ Unraid and can stay.
 docker build -t ghcr.io/dropnook/drop:local .
 ```
 
-Then `DROPNOOK_VERSION=local` in the `.env`. To try changes without
+Then `DROP_VERSION=local` in the `.env`. To try changes without
 building, mount your copy of the repository over `/app`: the web page files are
 read on every reload, `main.py` needs a restart of the container.
 

@@ -75,8 +75,13 @@ check "compose.yaml: without .env it refuses, naming the address" refused
 images() { docker compose -f "$COMPOSE" "$@" config --format json | python3 -c '
 import json, sys; print(" ".join(sorted({v["image"] for v in json.load(sys.stdin)["services"].values()})))'; }
 check "compose.yaml: image version 2 by default" test "$(images --env-file "$WORK/min.env")" = ghcr.io/dropnook/drop:2
-printf 'DROPNOOK_VERSION=2.2.1\n' | cat "$WORK/min.env" - > "$WORK/pinned.env"
+printf 'DROP_VERSION=2.2.1\n' | cat "$WORK/min.env" - > "$WORK/pinned.env"
 check "compose.yaml: image version from .env"   test "$(images --env-file "$WORK/pinned.env")" = ghcr.io/dropnook/drop:2.2.1
+# An .env written before the variable was renamed keeps its pin.
+printf 'DROPNOOK_VERSION=2.1.0\n' | cat "$WORK/min.env" - > "$WORK/pinned-old.env"
+check "compose.yaml: image version from an older .env" test "$(images --env-file "$WORK/pinned-old.env")" = ghcr.io/dropnook/drop:2.1.0
+printf 'DROPNOOK_VERSION=2.1.0\nDROP_VERSION=2.2.1\n' | cat "$WORK/min.env" - > "$WORK/pinned-both.env"
+check "compose.yaml: DROP_VERSION wins over the older name" test "$(images --env-file "$WORK/pinned-both.env")" = ghcr.io/dropnook/drop:2.2.1
 
 # ---------------------------------------------------------------- drop (LAN)
 docker run -d --name ci-drop -p "$LAN:80" \
