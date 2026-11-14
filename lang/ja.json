@@ -10,6 +10,8 @@
   "ui.show_image": "拡大表示",
   "ui.copy_image": "画像をコピー",
   "ui.image_copied": "画像をコピーしました",
+  "ui.copy_text": "内容をコピー",
+  "ui.text_copied": "内容をコピーしました。",
   "ui.image_copy_failed": "コピーできませんでした。画像を開き、ブラウザの「画像をコピー」を使ってください。",
   "ui.image_copy_needs_https": "画像のコピーには HTTPS が必要です。画像を開き、ブラウザの「画像をコピー」を使ってください。",
   "ui.image_too_large": "大きすぎてコピーできません。ダウンロードしてください。",

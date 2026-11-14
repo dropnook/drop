@@ -386,7 +386,10 @@ oder Wischen zum nächsten). *Kopieren* legt das Bild selbst in die
 Zwischenablage — bereit zum Einfügen in einen Chat, eine Mail oder ein
 Dokument. Das braucht [HTTPS](#https-im-heimnetz); ohne geht es per Rechtsklick
 auf das grosse Bild und *Bild kopieren* im Browser. iPhone-Fotos (HEIC) werden
-wie jede Datei abgelegt, bekommen aber kein Vorschaubild.
+wie jede Datei abgelegt, bekommen aber kein Vorschaubild. Textdateien (txt, md,
+json, yaml, …, bis 2 MB) haben ebenfalls *Kopieren* — in der Liste, im Menü und
+über der Vorschau, die ein Klick auf den Namen zeigt: Es legt den ganzen Inhalt
+in die Zwischenablage, auch ohne HTTPS.
 
 **Teilen** — *Teilen* bei einem Textfeld oder *Im Internet teilen…* im Menü
 einer Datei: wählen, wie lange der Link gilt (15 Minuten bis 30 Tage), auf

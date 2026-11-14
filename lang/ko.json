@@ -10,6 +10,8 @@
   "ui.show_image": "크게 보기",
   "ui.copy_image": "이미지 복사",
   "ui.image_copied": "이미지를 복사했습니다",
+  "ui.copy_text": "내용 복사",
+  "ui.text_copied": "내용을 복사했습니다.",
   "ui.image_copy_failed": "복사하지 못했습니다. 이미지를 열고 브라우저의 ‘이미지 복사’를 사용하세요.",
   "ui.image_copy_needs_https": "이미지를 복사하려면 HTTPS가 필요합니다. 이미지를 열고 브라우저의 ‘이미지 복사’를 사용하세요.",
   "ui.image_too_large": "너무 커서 복사할 수 없습니다. 다운로드하세요.",

@@ -10,6 +10,8 @@
   "ui.show_image": "Ver em grande",
   "ui.copy_image": "Copiar imagem",
   "ui.image_copied": "Imagem copiada",
+  "ui.copy_text": "Copiar conteúdo",
+  "ui.text_copied": "Conteúdo copiado.",
   "ui.image_copy_failed": "Não foi possível copiar — abra a imagem e use «Copiar imagem» do navegador.",
   "ui.image_copy_needs_https": "Copiar imagens exige HTTPS. Abra a imagem e use «Copiar imagem» do navegador.",
   "ui.image_too_large": "Demasiado grande para copiar — transfira-a.",

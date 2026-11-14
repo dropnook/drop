@@ -10,6 +10,8 @@
   "ui.show_image": "Groot tonen",
   "ui.copy_image": "Afbeelding kopiëren",
   "ui.image_copied": "Afbeelding gekopieerd",
+  "ui.copy_text": "Inhoud kopiëren",
+  "ui.text_copied": "Inhoud gekopieerd.",
   "ui.image_copy_failed": "Kopiëren lukte niet — open de afbeelding en kies ‘Afbeelding kopiëren’ in de browser.",
   "ui.image_copy_needs_https": "Afbeeldingen kopiëren kan alleen via HTTPS. Open de afbeelding en kies ‘Afbeelding kopiëren’ in de browser.",
   "ui.image_too_large": "Te groot om te kopiëren — download hem.",

@@ -374,7 +374,10 @@ list; a click shows them large (arrows or swiping for the next one). *Copy*
 puts the picture itself into the clipboard — ready to paste into a chat, a mail
 or a document. That needs [HTTPS](#https-in-your-network); without it,
 right-click the large picture and use the browser's *Copy image*. iPhone photos
-(HEIC) are kept like any file, but get no preview.
+(HEIC) are kept like any file, but get no preview. Text files (txt, md, json,
+yaml, …, up to 2 MB) have *Copy* too — in the list, in the menu and above the
+preview you get by clicking the name: it puts the whole content into the
+clipboard, also without HTTPS.
 
 **Sharing** — *Share* on a text field, or *Share on the internet…* in a file's
 menu: choose how long the link lives (15 minutes to 30 days) and optionally a

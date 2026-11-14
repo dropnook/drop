@@ -10,6 +10,8 @@
   "ui.show_image": "Vis stort",
   "ui.copy_image": "Kopier bilde",
   "ui.image_copied": "Bildet er kopiert",
+  "ui.copy_text": "Kopier innhold",
+  "ui.text_copied": "Innhold kopiert.",
   "ui.image_copy_failed": "Kopieringen mislyktes — åpne bildet og velg «Kopier bilde» i nettleseren.",
   "ui.image_copy_needs_https": "Kopiering av bilder krever HTTPS. Åpne bildet og velg «Kopier bilde» i nettleseren.",
   "ui.image_too_large": "For stort til å kopiere — last det ned i stedet.",
