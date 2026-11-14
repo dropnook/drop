@@ -1,11 +1,17 @@
-# Tests the Drop image and publishes it to the GitHub Container Registry:
+# Tests the Drop image and publishes it to the GitHub Container Registry,
+# under two names that always carry the same tags and the same digests:
+#
+#   ghcr.io/<owner>/drop       the name new installations use
+#   ghcr.io/<owner>/dropnook   the name before the app was renamed. Existing
+#                              installations pull it and would silently stop
+#                              getting updates without it: never remove it.
 #
 #   Actions → Image → Run workflow, version 1.2.3
-#                             →  ghcr.io/<owner>/<repo>:1.2.3, :1.2, :1, :latest,
+#                             →  <both names>:1.2.3, :1.2, :1, :latest,
 #                                then tag v1.2.3 and a GitHub release for it
 #   release v1.2.3 published  →  the same images (for releases made by hand)
-#   push to main              →  ghcr.io/<owner>/<repo>:edge
-#   Run workflow on a branch  →  ghcr.io/<owner>/<repo>:<branch>, to try it out
+#   push to main              →  <both names>:edge
+#   Run workflow on a branch  →  <both names>:<branch>, to try it out
 #   every Monday              →  the latest release rebuilt on a fresh base image,
 #                                for its security updates: :1.2, :1, :latest
 #                                (:1.2.3 stays as released). Skipped when the base
@@ -14,8 +20,8 @@
 #
 # Nothing is published unless .github/smoke-test.sh passes against the image.
 #
-# The first image ever published is private on GitHub; set the package to
-# public once (Packages → <repo> → Package settings → Change visibility).
+# A package is private when it is first published; set it to public once
+# (Packages → <name> → Package settings → Change visibility).
 name: Image
 
 on:
@@ -48,7 +54,8 @@ jobs:
   image:
     runs-on: ubuntu-latest
     env:
-      IMAGE: ghcr.io/${{ github.repository_owner }}/dropnook
+      IMAGE: ghcr.io/${{ github.repository_owner }}/drop
+      IMAGE_OLD: ghcr.io/${{ github.repository_owner }}/dropnook   # for good, see above
       BASE: python:3.13-slim           # keep in step with FROM in the Dockerfile
       RELEASE_TAG: ${{ inputs.version && format('v{0}', inputs.version) || '' }}
       SCHEDULED: ${{ github.event_name == 'schedule' || inputs.rebuild == true }}
@@ -120,7 +127,7 @@ jobs:
         if: env.SCHEDULED == 'true'
         id: fresh
         run: |
-          built=$(docker buildx imagetools inspect "${IMAGE,,}:latest" \
+          built=$(docker buildx imagetools inspect "${IMAGE_OLD,,}:latest" \
             --format '{{ index (index .Image "linux/amd64").Config.Labels "org.opencontainers.image.base.digest" }}' \
             2>/dev/null || true)
           if [ "$built" = "${{ steps.base.outputs.digest }}" ] && [ "${{ github.event_name }}" = schedule ]; then
@@ -141,9 +148,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       # Registry names are lower case, account names need not be.
-      - name: Image name
+      - name: Image names
         id: names
-        run: echo "image=${IMAGE,,}" >> "$GITHUB_OUTPUT"
+        run: printf 'images<<EOF\n%s\n%s\nEOF\n' "${IMAGE,,}" "${IMAGE_OLD,,}" >> "$GITHUB_OUTPUT"
 
       - id: meta
         if: steps.fresh.outputs.skip != 'true'
@@ -151,7 +158,7 @@ jobs:
         env:
           VERSION: ${{ env.RELEASE_TAG || steps.latest.outputs.tag }}
         with:
-          images: ${{ steps.names.outputs.image }}
+          images: ${{ steps.names.outputs.images }}
           flavor: latest=false
           tags: |
             type=semver,pattern={{version}},value=${{ env.VERSION }},enable=${{ env.SCHEDULED != 'true' }}
@@ -168,6 +175,17 @@ jobs:
             org.opencontainers.image.base.digest=${{ steps.base.outputs.digest }}
             org.opencontainers.image.revision=${{ steps.src.outputs.sha }}
             ${{ steps.src.outputs.version && format('org.opencontainers.image.version={0}', steps.src.outputs.version) || '' }}
+
+      # Before anything is built: every tag is there for both names.
+      - name: Both names
+        if: steps.fresh.outputs.skip != 'true'
+        env:
+          TAGS: ${{ steps.meta.outputs.tags }}
+        run: |
+          new=$(sed -n "s|^${IMAGE,,}:||p" <<<"$TAGS" | sort)
+          old=$(sed -n "s|^${IMAGE_OLD,,}:||p" <<<"$TAGS" | sort)
+          [ -n "$new" ] && [ "$new" = "$old" ] \
+            || { echo "::error::${IMAGE,,} and ${IMAGE_OLD,,} must carry the same tags"; exit 1; }
 
       # First for this machine only, to test it; the cache makes the real
       # build below reuse every layer of it.
@@ -190,6 +208,7 @@ jobs:
 
       - name: Build and publish
         if: steps.fresh.outputs.skip != 'true'
+        id: publish
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -213,3 +232,16 @@ jobs:
           if [ -f "$notes" ]; then set -- --notes-file "$notes"; fi
           gh release create "$RELEASE_TAG" --target "$GITHUB_SHA" \
             --title "Drop ${RELEASE_TAG#v}" --generate-notes "$@"
+
+      # Last, so that a registry hiccup here cannot leave a release half made.
+      - name: Both names, one image
+        if: steps.fresh.outputs.skip != 'true'
+        env:
+          TAGS: ${{ steps.meta.outputs.tags }}
+          DIGEST: ${{ steps.publish.outputs.digest }}
+        run: |
+          for ref in $TAGS; do
+            got=$(docker buildx imagetools inspect "$ref" --format '{{json .Manifest}}' | jq -r .digest)
+            echo "$ref  $got"
+            [ "$got" = "$DIGEST" ] || { echo "::error::$ref is not $DIGEST"; exit 1; }
+          done

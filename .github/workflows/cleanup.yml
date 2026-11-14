@@ -1,13 +1,14 @@
-# Removes image versions no tag needs any more from ghcr.io/<owner>/dropnook:
-# what the weekly rebuilds, :edge and test builds of branches leave behind.
+# Removes image versions no tag needs any more from both names of the image,
+# ghcr.io/<owner>/drop and ghcr.io/<owner>/dropnook: what the weekly rebuilds,
+# :edge and test builds of branches leave behind.
 # Multi-arch aware — the platform images and attestations of a tagged image
 # stay; afterwards every tagged image is checked to be complete.
 #
 #   every Monday, after the security rebuild
 #   Actions → Clean up images → Run workflow   (optionally a dry run, or tags to remove)
 #
-# Needs the package to give this repository the Admin role
-# (Packages → dropnook → Package settings → Manage Actions access).
+# Needs both packages to give this repository the Admin role
+# (Packages → <name> → Package settings → Manage Actions access).
 name: Clean up images
 
 on:
@@ -34,10 +35,16 @@ concurrency:
 jobs:
   cleanup:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false       # one package failing does not skip the other
+      max-parallel: 1
+      matrix:
+        package: [drop, dropnook]
+    name: cleanup (${{ matrix.package }})
     steps:
       - uses: dataaxiom/ghcr-cleanup-action@v1
         with:
-          package: dropnook
+          package: ${{ matrix.package }}
           delete-untagged: true
           delete-tags: ${{ inputs.delete-tags }}
           exclude-tags: latest,edge,2,2.*,1,1.*
