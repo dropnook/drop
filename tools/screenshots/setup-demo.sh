@@ -7,7 +7,7 @@ set -e
 HERE=$(cd "$(dirname "$0")" && pwd)
 SET=${1:-en}
 WORK=${WORK:-/srv/demo}
-IMAGE=${IMAGE:-ghcr.io/dropnook/dropnook:2}
+IMAGE=${IMAGE:-ghcr.io/dropnook/drop:2}
 case $SET in
   en) LAN=127.0.0.2; PUB=127.0.0.3; USR=127.0.0.6 ;;
   de) LAN=127.0.0.4; PUB=127.0.0.5; USR=127.0.0.7 ;;

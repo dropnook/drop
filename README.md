@@ -57,7 +57,7 @@ calls itself "Tower Drop", after your server.
 | | |
 |---|---|
 | Containers | `drop` (Drop itself, your network only) and `drop-share` (share links, internet) |
-| Image | `ghcr.io/dropnook/dropnook:2` |
+| Image | `ghcr.io/dropnook/drop:2` |
 | Data | the Unraid share `drop` → `files/`, `texts/`, `shares/` (with users also `users/`) |
 | Drop | `https://drop.yourdomain.com` — in your network |
 | Share links | `https://drop-share.yourdomain.com/k7m3x-9pq2r` — from anywhere |
@@ -165,7 +165,10 @@ On the new stack, **Edit Stack**:
 | `PIN`, `USER_…` | empty | Optional — see [PIN](#pin-or-password-optional) and [Users](#users-optional) |
 
 Comments go on lines of their own, never behind a value. The image is
-`ghcr.io/dropnook/dropnook`, in the version `DROPNOOK_VERSION`.
+`ghcr.io/dropnook/drop`, in the version `DROPNOOK_VERSION`. The container from
+Community Applications, and stacks set up earlier, use
+`ghcr.io/dropnook/dropnook`: the same image under its earlier name, with the
+same updates. Nothing to change there.
 
 **Save**. While in *Edit Stack*, tab **Settings** → **Icon URL** gives the stack
 its icon:
