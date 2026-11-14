@@ -1,6 +1,6 @@
 # The Dropnook™ name
 
-The code of Dropnook is free software under the
+The code of Drop is free software under the
 [GNU Affero General Public License v3.0](LICENSE). That license covers the
 code — not the name **Dropnook™** or its logo, which identify this project
 and its official releases. (AGPL-3.0, section 7(e), allows exactly this.)

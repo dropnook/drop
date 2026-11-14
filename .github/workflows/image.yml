@@ -1,4 +1,4 @@
-# Tests the Dropnook image and publishes it to the GitHub Container Registry:
+# Tests the Drop image and publishes it to the GitHub Container Registry:
 #
 #   Actions → Image → Run workflow, version 1.2.3
 #                             →  ghcr.io/<owner>/<repo>:1.2.3, :1.2, :1, :latest,
@@ -161,7 +161,7 @@ jobs:
             type=edge,branch=main,enable=${{ env.SCHEDULED != 'true' }}
             type=ref,event=branch,enable=${{ github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/main' && inputs.version == '' && env.SCHEDULED != 'true' }}
           labels: |
-            org.opencontainers.image.title=Dropnook
+            org.opencontainers.image.title=Drop
             org.opencontainers.image.description=Instant sharing for your home network, with expiring links to the internet
             org.opencontainers.image.licenses=AGPL-3.0-only
             org.opencontainers.image.base.name=docker.io/library/${{ env.BASE }}
@@ -212,4 +212,4 @@ jobs:
           notes=".github/release-notes/$RELEASE_TAG.md"
           if [ -f "$notes" ]; then set -- --notes-file "$notes"; fi
           gh release create "$RELEASE_TAG" --target "$GITHUB_SHA" \
-            --title "Dropnook ${RELEASE_TAG#v}" --generate-notes "$@"
+            --title "Drop ${RELEASE_TAG#v}" --generate-notes "$@"

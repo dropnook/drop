@@ -1,4 +1,4 @@
-// Dropnook screenshot gallery: arrows, keys, swipe, click to zoom, EN/DE.
+// Drop screenshot gallery: arrows, keys, swipe, click to zoom, EN/DE.
 (() => {
   const NAMES = ['1-overview', '2-share', '3-shares', '4-public', '5-phone', '6-languages', '7-theme',
     '8-colours', '9-users'];
@@ -19,7 +19,7 @@
       keys: 'Click the picture to zoom in, move the mouse to look around · ← → to browse.',
       touch: 'Tap the picture to zoom in, swipe to browse.',
       back: '← Home', home: '../',
-      title: 'Dropnook — screenshots', dir: '../screenshots/', readme: 'https://github.com/dropnook/drop',
+      title: 'Drop — screenshots', dir: '../screenshots/', readme: 'https://github.com/dropnook/drop',
     },
     de: {
       slides: [
@@ -37,7 +37,7 @@
       keys: 'Klick aufs Bild vergrössert, mit der Maus umsehen · ← → zum Blättern.',
       touch: 'Tippen vergrössert, wischen blättert.',
       back: '← Startseite', home: '../de/',
-      title: 'Dropnook — Bilder', dir: '../screenshots/de/', readme: 'https://github.com/dropnook/drop/blob/main/README.de.md',
+      title: 'Drop — Bilder', dir: '../screenshots/de/', readme: 'https://github.com/dropnook/drop/blob/main/README.de.md',
     },
   };
   const params = new URLSearchParams(location.search);

@@ -1,4 +1,4 @@
-# Dropnook — for developers and power users
+# Drop — for developers and power users
 
 The [README](../README.md) covers installing and using Drop with Unraid's
 Compose Manager Plus. This page has the rest.

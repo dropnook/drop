@@ -18,8 +18,8 @@ Something has to leave the house? Share a single file or text through a link
 that expires by itself, optionally with a password. It is served by a second,
 locked-down container — Drop itself is never reachable from the internet.
 
-*Dropnook™* is the project's name; on your devices it is simply *Drop* — the
-page calls itself "Tower Drop", after your server.
+*Drop* is made by [dropnook](https://dropnook.app/). On your devices the page
+calls itself "Tower Drop", after your server.
 
 <p align="center">
   <a href="https://drop.dropnook.app/gallery/"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/slideshow-dark.webp"><img src="docs/screenshots/slideshow-light.webp" alt="Drop in pictures: text fields and files, sharing to the internet, what is public, the recipient's page, the phone layout, other languages, light and dark, five colours, users with their own area" width="100%"></picture></a>
@@ -101,7 +101,7 @@ listed under [What Drop expects from your reverse proxy](#what-drop-expects-from
 
 > **Only in your network, without sharing to the internet?** Then one container
 > is enough: in Unraid's *Apps* tab (Community Applications), search for
-> **Dropnook** and install it. It runs `drop` alone with `SHARING=off` — no
+> **dropnook** and install *Drop*. It runs `drop` alone with `SHARING=off` — no
 > second address, no reverse proxy, no domain. Drop gets an address of its own
 > in your network (network type *Custom: br0*; put a free address into *Fixed
 > IP address*) and opens at `http://<that address>/`. Rather *Bridge*? Then
@@ -597,16 +597,14 @@ typing; unsaved text is sent once the connection is back.
   More than about 10 people with video is more than phones like: every one of
   them sends its picture to every other one.
 
-## Support Dropnook
+## Support Drop
 
-If Dropnook is useful to you, you can say thanks
-with a donation: **[paypal.me/dropnook](https://paypal.me/dropnook)**. Ideally 5 € (or $5, 5 CHF)
-or more — PayPal keeps a fixed fee plus a few percent of every payment, so of a
-single euro hardly anything arrives.
+If Drop is useful to you, you can say thanks with a donation:
+**[paypal.me/dropnook](https://paypal.me/dropnook)**.
 
 ---
 
 <sub>All settings, building the image yourself and releasing:
-[docs/DEVELOPMENT.md](docs/DEVELOPMENT.md). Dropnook is free software under the
+[docs/DEVELOPMENT.md](docs/DEVELOPMENT.md). Drop is free software under the
 [GNU Affero General Public License v3.0](LICENSE); the name Dropnook™ is not
 part of that license — see [TRADEMARKS.md](TRADEMARKS.md).</sub>

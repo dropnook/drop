@@ -19,8 +19,8 @@ der von selbst abläuft, auf Wunsch mit Passwort. Ausgeliefert wird er von einem
 zweiten, abgeschotteten Container — Drop selbst ist aus dem Internet nie
 erreichbar.
 
-*Dropnook™* heisst das Projekt; auf deinen Geräten heisst es einfach *Drop* — die
-Seite nennt sich nach deinem Server „Tower Drop“.
+*Drop* ist von [dropnook](https://dropnook.app/de/). Auf deinen Geräten nennt sich
+die Seite nach deinem Server „Tower Drop“.
 
 <p align="center">
   <a href="https://drop.dropnook.app/gallery/?lang=de"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/de/slideshow-dark.webp"><img src="docs/screenshots/de/slideshow-light.webp" alt="Drop in Bildern: Textfelder und Dateien, Teilen ins Internet, was öffentlich ist, die Seite des Empfängers, die Ansicht auf dem Handy, andere Sprachen, hell und dunkel, fünf Farben, Benutzer mit eigenem Bereich" width="100%"></picture></a>
@@ -104,7 +104,7 @@ steht.
 
 > **Nur im Heimnetz, ohne Teilen ins Internet?** Dann reicht ein einzelner
 > Container: in Unraid im Reiter *Apps* (Community Applications) nach
-> **Dropnook** suchen und installieren. Er startet `drop` allein mit
+> **dropnook** suchen und *Drop* installieren. Er startet `drop` allein mit
 > `SHARING=off` — ohne zweite Adresse, ohne Reverse Proxy, ohne Domain; Drop
 > bekommt eine eigene Adresse in deinem Netz (Netzwerktyp *Custom: br0*; eine
 > freie Adresse bei *Fixed IP address* eintragen) und öffnet sich unter
@@ -624,16 +624,14 @@ ungespeicherter Text wird nachgeschickt, sobald die Verbindung zurück ist.
   Mehr als etwa 10 Personen mit Video mögen Handys nicht: Jede
   schickt ihr Bild an jede andere.
 
-## Dropnook unterstützen
+## Drop unterstützen
 
-Wenn Dropnook dir nützt, kannst du dich mit
-einer Spende bedanken: **[paypal.me/dropnook](https://paypal.me/dropnook)**. Am besten ab 5 €
-(oder 5 CHF) — PayPal behält von jeder Zahlung einen festen Betrag plus ein
-paar Prozent ein, von einem einzelnen Euro kommt kaum etwas an.
+Wenn Drop dir nützt, kannst du dich mit einer Spende bedanken:
+**[paypal.me/dropnook](https://paypal.me/dropnook)**.
 
 ---
 
 <sub>Alle Einstellungen, eigenes Image bauen und Releases (auf Englisch):
-[docs/DEVELOPMENT.md](docs/DEVELOPMENT.md). Dropnook ist freie Software unter der
+[docs/DEVELOPMENT.md](docs/DEVELOPMENT.md). Drop ist freie Software unter der
 [GNU Affero General Public License v3.0](LICENSE); der Name Dropnook™ gehört
 nicht zu dieser Lizenz — siehe [TRADEMARKS.md](TRADEMARKS.md).</sub>
