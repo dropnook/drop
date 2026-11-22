@@ -219,7 +219,7 @@ arm64 and publishes it to the GitHub Container Registry:
 
 * every push to `main` as `:edge`;
 * a release as `:<version>`, `:<major>.<minor>`, `:<major>` and `:latest`;
-* every Monday the latest release again, built on a fresh base image for its
+* every Sunday the latest release again, built on a fresh base image for its
   security updates, as `:<major>.<minor>`, `:<major>` and `:latest` —
   `:<version>` stays as released. Skipped when the base image has not changed
   since the last build (its digest is kept in the label

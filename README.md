@@ -361,7 +361,7 @@ away an address or a PIN; the `.env` is yours.
   | label `net.unraid.docker.webui` | `WEBUI` |
   | `PIN`, `USER_…`, `TZ` under `environment` | `PIN`, `USER_…`, `TZ` |
 
-Security updates reach the image on their own: every Monday the current release is
+Security updates reach the image on their own: every Sunday the current release is
 rebuilt on a fresh base image (Debian, Python, OpenSSL) whenever that base has
 changed. *Check for Updates* then shows an update for the same version — take
 it like any other. Every image is tested before it is published.

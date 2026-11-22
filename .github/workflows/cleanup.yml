@@ -4,7 +4,7 @@
 # Multi-arch aware — the platform images and attestations of a tagged image
 # stay; afterwards every tagged image is checked to be complete.
 #
-#   every Monday, after the security rebuild
+#   every Sunday, after the security rebuild
 #   Actions → Clean up images → Run workflow   (optionally a dry run, or tags to remove)
 #
 # Needs both packages to give this repository the Admin role
@@ -13,7 +13,7 @@ name: Clean up images
 
 on:
   schedule:
-    - cron: "47 5 * * 1"
+    - cron: "47 5 * * 0"
   workflow_dispatch:
     inputs:
       dry-run:
