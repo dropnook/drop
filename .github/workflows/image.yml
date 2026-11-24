@@ -169,7 +169,7 @@ jobs:
             type=semver,pattern={{major}}.{{minor}},value=${{ env.VERSION }}
             type=semver,pattern={{major}},value=${{ env.VERSION }}
             type=raw,value=latest,enable=${{ github.event_name == 'release' || env.VERSION != '' }}
-            type=edge,branch=main,enable=${{ env.SCHEDULED != 'true' }}
+            type=edge,branch=main,enable=${{ env.SCHEDULED != 'true' && env.VERSION == '' }}
             type=ref,event=branch,enable=${{ github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/main' && inputs.version == '' && env.SCHEDULED != 'true' }}
           labels: |
             org.opencontainers.image.title=Drop
@@ -238,6 +238,9 @@ jobs:
             --title "Drop ${RELEASE_TAG#v}" --generate-notes "$@"
 
       # Last, so that a registry hiccup here cannot leave a release half made.
+      # Every tag this run wrote belongs to this run alone: a release does not
+      # write :edge (the push of the same commit does), or the two runs, started
+      # moments apart, would overwrite each other's :edge and fail this check.
       - name: Both names, one image
         if: steps.fresh.outputs.skip != 'true'
         env:
