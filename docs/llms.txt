@@ -5,9 +5,9 @@
 Key facts:
 
 - Two containers from one image (ghcr.io/dropnook/drop): `drop` (the drop box, LAN only, refuses anything coming through a proxy) and `drop-share` (share links only; non-root, read-only file system, no Linux capabilities, sees only the shared items).
-- Share links look like https://drop-share.yourdomain.com/k7m3x-9pq2r — 10 characters, no look-alike characters, about 50 bits; they expire after 15 minutes to 30 days.
+- Share links look like https://drop-share.yourdomain.com/k7m3x-9pq2r — 10 characters, no look-alike characters, about 50 bits; they expire after 15 minutes to 30 days. While a shared file is being downloaded, the list of shares shows its progress and speed.
 - HTTPS in the LAN with an existing certificate (e.g. from Nginx Proxy Manager), found automatically.
-- Picture previews, a large view and "Copy" of a picture into another computer's clipboard; "Copy" of a text file's whole content.
+- Picture previews, a large view and "Copy" of a picture into another computer's clipboard; "Copy" of a text file's whole content. Uploads are resumable and show progress and speed (kbit/s, Mbit/s, Gbit/s) on every device.
 - A live room: video or voice for up to 10 people, straight from device to device (WebRTC, home network only, needs HTTPS), with a preview in the tile, photos and recording into the shared files.
 - 17 languages; five colour layouts (teal, gold, blue, violet, coral), each in light and dark.
 - Optional: one PIN for everyone, or up to five users (USER_<COLOUR>=name:PIN in the .env), each with an area of their own next to the shared one and their own colour.

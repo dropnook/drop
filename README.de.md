@@ -17,7 +17,8 @@ eigenen Server.
 Muss etwas aus dem Haus? Einzelne Dateien oder Texte über einen Link teilen,
 der von selbst abläuft, auf Wunsch mit Passwort. Ausgeliefert wird er von einem
 zweiten, abgeschotteten Container — Drop selbst ist aus dem Internet nie
-erreichbar.
+erreichbar. Lädt jemand eine geteilte Datei herunter, zeigt die Liste der
+Freigaben, wie weit der Download ist und wie schnell er läuft.
 
 *Drop* ist von [dropnook](https://dropnook.app/de/). Auf deinen Geräten nennt sich
 die Seite nach deinem Server „Tower Drop“.
@@ -42,7 +43,7 @@ die Seite nach deinem Server „Tower Drop“.
 
 * Textfelder mit Wort-, Zeichen- und Linkzählung; ungespeicherter Text übersteht
   Neuladen und Verbindungsabbrüche.
-* Uploads jeder Grösse — fortsetzbar, mit Fortschritt für alle sichtbar.
+* Uploads jeder Grösse — fortsetzbar, mit Fortschritt und Tempo für alle sichtbar.
 * Die Seite heisst „`<Servername>` Drop“, der Name kommt live aus Unraid.
 * Screenshots direkt aus der Zwischenablage mit Strg+V; Bilder mit Vorschau,
   Grossansicht und *Kopieren* in die Zwischenablage eines anderen Computers.
@@ -251,6 +252,11 @@ deine Sache. Drop braucht nur das:
 Zertifikat zu sehen. Als zweite Sicherung weist `drop` jede Anfrage ab, die über
 einen Proxy oder aus dem Internet kommt — selbst ein falsch eingestellter Proxy
 erreicht Drop selbst nicht.
+
+Downloads von `drop-share` tragen `X-Accel-Buffering: no`, damit Proxys auf
+nginx-Basis (Nginx Proxy Manager) sie gleich weiterreichen, statt sie zuerst auf
+die Platte zu puffern; nur so stimmen auch Fortschritt und Tempo in der Liste der
+Freigaben. Einzustellen gibt es dafür nichts.
 
 ## HTTPS im Heimnetz
 

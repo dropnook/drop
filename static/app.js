@@ -160,6 +160,62 @@ function formatSize(bytes) {
   return `${value.toLocaleString(locale, { maximumFractionDigits: i === 0 || value >= 10 ? 0 : 1 })} ${units[i]}`;
 }
 
+/* Transfer speed from bytes per second, in bits as network speeds are given:
+   decimal units, one decimal below 10, e.g. 7.3 Mbit/s, 54 Mbit/s, 1.2 Gbit/s. */
+function formatRate(bytesPerSecond) {
+  const units = ['kbit/s', 'Mbit/s', 'Gbit/s'];
+  let value = Math.max(0, Number(bytesPerSecond) || 0) * 8 / 1000;
+  let i = 0;
+  while (value >= 999.5 && i < units.length - 1) { value /= 1000; i++; }
+  if (value < 1) return `0 ${units[0]}`;
+  return `${value.toLocaleString(locale, { maximumFractionDigits: value < 9.95 ? 1 : 0 })} ${units[i]}`;
+}
+
+/* The speed of an upload in this tab: bytes moved over the last four seconds,
+   looked at once a second. Nothing until there is a second to measure. The
+   count only ever grows (a retried chunk counts again, it did move), so the
+   speed can never go negative. */
+const RATE_WINDOW = 4000;
+let rateTimer = null;
+
+function measureUploads() {
+  const now = performance.now();
+  ownUploads.forEach((u) => {
+    const samples = u.samples || (u.samples = []);
+    samples.push([now, u.moved || 0]);
+    while (samples.length > 2 && now - samples[1][0] >= RATE_WINDOW) samples.shift();
+    const [then, before] = samples[0];
+    u.rate = now - then >= 1000 ? Math.max(0, ((u.moved || 0) - before) / ((now - then) / 1000)) : null;
+  });
+  if (!ownUploads.size) { clearInterval(rateTimer); rateTimer = null; return; }
+  drawList();
+}
+
+function watchSpeed() {
+  if (!rateTimer) rateTimer = setInterval(measureUploads, 1000);
+}
+
+/* A chunk goes up by XMLHttpRequest rather than fetch: only that tells how
+   far a request body has got, so progress and speed move within a chunk too.
+   Answers like fetch would (status, ok); throws on a broken connection. */
+function putChunk(url, body, onProgress) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('PUT', url);
+    xhr.setRequestHeader('content-type', 'application/octet-stream');
+    if (openedAs) xhr.setRequestHeader('x-drop-as', openedAs);
+    xhr.upload.onprogress = (e) => onProgress(e.loaded);
+    xhr.onload = () => {
+      if (xhr.status === 401) location.reload();     // as the fetch wrapper above does
+      resolve({ status: xhr.status, ok: xhr.status >= 200 && xhr.status < 300 });
+    };
+    xhr.onerror = () => reject(new Error('Network error'));
+    xhr.onabort = () => reject(new Error('Aborted'));
+    xhr.ontimeout = () => reject(new Error('Timeout'));
+    xhr.send(body);
+  });
+}
+
 function formatDate(seconds) {
   const d = new Date(seconds * 1000);
   const time = d.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' });
@@ -1058,6 +1114,20 @@ function drawShares() {
       : `${t('ui.views', { n: rec.views || 0 })} · ${t('ui.downloads', { n: rec.downloads || 0 })}`;
     main.appendChild(el('div', 'share-meta',
       `${remaining(rec.expires)} (${t('ui.until', { date: formatDate(rec.expires) })}) · ${counts}`));
+    // Downloads running right now, as drop-share reports them (numbers only,
+    // checked by read_counters in main.py).
+    (Array.isArray(rec.live) ? rec.live : []).forEach((d) => {
+      const percent = d.total ? Math.min(100, Math.floor((d.sent / d.total) * 100)) : 0;
+      const row = el('div', 'share-live');
+      // No speed yet in the first moments (0): then the progress alone.
+      row.appendChild(el('div', 'share-meta', `↓ ${num(percent)} %` + (d.rate > 0 ? ` · ${formatRate(d.rate)}` : '')));
+      const bar = el('div', 'bar');
+      const fill = el('i');
+      fill.style.width = percent + '%';
+      bar.appendChild(fill);
+      row.appendChild(bar);
+      main.appendChild(row);
+    });
     li.appendChild(main);
 
     const buttons = el('div', 'share-buttons');
@@ -1162,10 +1232,12 @@ function uploadRow(u) {
   main.appendChild(el('div', 'row-name', u.name));
   // A recording from the live room has no size yet: what came so far, no percentage.
   const percent = u.size && !u.growing ? Math.min(100, Math.round((u.received / u.size) * 100)) : 0;
-  main.appendChild(el('div', 'row-meta', u.growing
+  // The speed is added in code, so no translation has to change for it.
+  const speed = typeof u.rate === 'number' ? ` · ${formatRate(u.rate)}` : '';
+  main.appendChild(el('div', 'row-meta', (u.growing
     ? t(u.own ? 'ui.rec_uploading' : 'ui.rec_uploading_elsewhere', { done: formatSize(u.received) })
     : t(u.own ? 'ui.uploading' : 'ui.uploading_elsewhere',
-      { percent, done: formatSize(u.received), total: formatSize(u.size) })));
+      { percent, done: formatSize(u.received), total: formatSize(u.size) })) + speed));
   const bar = el('div', 'bar' + (u.growing ? ' busy' : ''));
   const fill = el('i');
   fill.style.width = u.growing ? '' : percent + '%';
@@ -1691,9 +1763,19 @@ async function uploadFile(file, into) {
   const entry = {
     id: init.id, area: into, name: file.name, size: file.size,
     received: Math.min(file.size, done.size * chunkSize),
+    moved: 0,            // bytes sent in all, for the speed (see measureUploads)
     cancelled: false,
   };
+  const inFlight = new Map();     // chunk index → bytes of it sent so far
+  let finished = entry.received;  // bytes of the chunks that are done
+  // Finished chunks plus what the running ones have sent: smooth, never past the size.
+  const showProgress = () => {
+    let sent = 0;
+    inFlight.forEach((n) => { sent += n; });
+    entry.received = Math.min(file.size, finished + sent);
+  };
   ownUploads.set(init.id, entry);
+  watchSpeed();
   drawList();
   if (init.resumed) toast(t('ui.upload_resumed', { name: file.name }));
 
@@ -1715,12 +1797,16 @@ async function uploadFile(file, into) {
       let attempt = 0;
       while (true) {
         if (entry.cancelled) return;
+        let last = 0;
+        inFlight.set(index, 0);                 // a retry starts the chunk over
         try {
-          const response = await fetch(`/api/upload/${init.id}/${index}`, {
-            method: 'PUT',
-            headers: { 'content-type': 'application/octet-stream' },
-            body: file.slice(from, to),
-          });
+          const response = await putChunk(`/api/upload/${init.id}/${index}`,
+            file.slice(from, to), (loaded) => {
+              entry.moved += Math.max(0, loaded - last);
+              last = loaded;
+              inFlight.set(index, Math.min(loaded, to - from));
+              showProgress();
+            });
           if (response.status === 404) {
             // The upload no longer exists — someone deleted everything in the
             // meantime. Retrying does not help.
@@ -1736,7 +1822,9 @@ async function uploadFile(file, into) {
         }
       }
 
-      entry.received = Math.min(file.size, entry.received + (to - from));
+      inFlight.delete(index);
+      finished += to - from;
+      showProgress();
       drawList();
     }
   }
@@ -3358,6 +3446,7 @@ async function startRecording() {
     chain: Promise.resolve(), stopping: false, ending: false, closed: false, failed: '',
   };
   ownUploads.set(entry.id, entry);
+  watchSpeed();
   recorder.ondataavailable = (e) => {
     if (e.data && e.data.size) { r.pending.push(e.data); r.pendingBytes += e.data.size; }
     if (r.stopping || r.pendingBytes >= REC_PIECE || Date.now() - r.flushed >= REC_EVERY) flushRecording(r);
@@ -3403,6 +3492,7 @@ async function sendPiece(r, index, piece) {
       if (response.status === 507) { r.failed = t('ui.error_no_space'); break; }
       if (!response.ok) throw new Error('HTTP ' + response.status);
       r.entry.received = r.entry.size = r.entry.received + piece.size;
+      r.entry.moved = r.entry.received;     // for the speed, as with other uploads
       drawList();
       return;
     } catch (e) {

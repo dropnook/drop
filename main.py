@@ -34,6 +34,7 @@ import threading
 import time
 import unicodedata
 import uuid
+from collections import deque
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Dict, Optional, Set
@@ -1177,10 +1178,41 @@ def visible_shares(shares: list, user: Optional["User"]) -> list:
     return out
 
 
-def read_counters(sid: str) -> dict:
-    """Views and downloads. Written by drop-share, the container facing the
-    internet — so taken with care: a regular file, small, whole numbers only.
-    Anything else counts as 0 and cannot hold up or break the LAN page."""
+# drop-share also says which downloads of a share are running right now:
+# "live" (at most LIVE_PER_SHARE of them, each bytes sent, bytes in all, bytes
+# per second) and "at" (when, Unix time). It writes that every LIVE_EVERY
+# seconds while one runs; the LAN page shows state no older than LIVE_STALE —
+# so a drop-share that crashed cannot leave a download running for ever.
+LIVE_PER_SHARE = 5
+LIVE_EVERY = 2.0
+LIVE_STALE = 10
+LIVE_KEYS = ("sent", "total", "rate")
+# A file goes out in blocks of this size. Not larger: the speed of a slow
+# download is counted in blocks, and at 300 kB/s a block of 1 MB only comes
+# every three seconds — the figure would jump between nothing and double.
+DOWNLOAD_BLOCK = 256 * 1024
+
+
+def sound_number(value, limit: int = 10 ** 15) -> bool:
+    return isinstance(value, int) and not isinstance(value, bool) and 0 <= value < limit
+
+
+def sound_live(data: dict) -> bool:
+    """The live state has exactly the shape drop-share writes, or it is not there."""
+    live, at = data.get("live"), data.get("at")
+    if not isinstance(live, list) or not 0 < len(live) <= LIVE_PER_SHARE or not sound_number(at):
+        return False
+    return all(isinstance(entry, dict) and set(entry) == set(LIVE_KEYS)
+               and all(sound_number(entry[k]) for k in LIVE_KEYS)
+               and entry["sent"] <= entry["total"] and entry["rate"] < 10 ** 12
+               for entry in live)
+
+
+def load_counters(sid: str) -> dict:
+    """The counter file as it may be taken. Written by drop-share, the
+    container facing the internet — so taken with care: a regular file, small,
+    whole numbers only. Anything else counts as 0 (and as no live state) and
+    cannot hold up or break the LAN page. No string ever comes out of here."""
     counts = {"views": 0, "downloads": 0}
     try:
         fd = os.open(counter_path(sid), os.O_RDONLY | os.O_NONBLOCK | os.O_NOFOLLOW)
@@ -1194,22 +1226,126 @@ def read_counters(sid: str) -> dict:
         data = {}
     finally:
         os.close(fd)
+    if not isinstance(data, dict):
+        return counts
     for key in counts:
-        value = data.get(key) if isinstance(data, dict) else None
-        if isinstance(value, int) and not isinstance(value, bool) and 0 <= value < 10 ** 12:
-            counts[key] = value
+        if sound_number(data.get(key), 10 ** 12):
+            counts[key] = data[key]
+    if sound_live(data):
+        counts["live"] = [{k: entry[k] for k in LIVE_KEYS} for entry in data["live"]]
+        counts["at"] = data["at"]
     return counts
 
 
+def read_counters(sid: str) -> dict:
+    """Views and downloads for the LAN page, plus the running downloads if
+    drop-share reported them a moment ago."""
+    data = load_counters(sid)
+    at = data.pop("at", None)
+    live = data.pop("live", None)
+    if live and -LIVE_STALE <= time.time() - at <= LIVE_STALE:
+        data["live"] = live
+    return data
+
+
 def count_access(sid: str, what: str) -> None:
-    """Public container only — counters/ is the one place it may write to."""
+    """Public container only — counters/ is the one place it may write to.
+    Leaves the live state as it is; write_live leaves the numbers."""
     with share_lock:
-        data = read_counters(sid)
+        data = load_counters(sid)
         data[what] += 1
         try:
             write_json(counter_path(sid), data)
         except OSError:
             pass                 # counters/ not writable: then without numbers
+
+
+class Transfer:
+    """One share download running through drop-share (see file_response)."""
+
+    def __init__(self, sid: str, total: int):
+        self.sid = sid
+        self.total = total
+        self.sent = 0
+        self.started = time.monotonic()
+        self.meter: Optional[RateMeter] = None
+
+    def add(self, n: int) -> None:
+        self.sent += n
+        if self.meter is None:
+            # The first megabytes only fill the buffers on the way and say
+            # nothing about the line: the speed is measured from two seconds in.
+            if time.monotonic() - self.started >= 2.0:
+                self.meter = RateMeter(5.0, 30.0)
+            return
+        self.meter.add(n)
+
+    def state(self) -> dict:
+        rate = self.meter.rate() if self.meter else None
+        return {"sent": min(self.sent, self.total), "total": self.total, "rate": rate or 0}
+
+
+transfers: Set[Transfer] = set()
+transfers_lock = threading.Lock()    # only around the set, never while a block is sent
+live_writer: Optional[threading.Thread] = None
+
+
+def write_live(sid: str) -> None:
+    """Puts the share's running downloads into its counter file — or takes
+    them out once none is left. Under share_lock, like count_access, and taken
+    from the registry inside it, so the last write always tells the truth."""
+    with share_lock:
+        with transfers_lock:
+            running = [t for t in transfers if t.sid == sid][:LIVE_PER_SHARE]
+        data = load_counters(sid)
+        if not running and "live" not in data:
+            return                       # a short download that never showed: nothing to take out
+        data.pop("live", None)
+        data.pop("at", None)
+        if running:
+            data["live"] = [t.state() for t in running]
+            data["at"] = int(time.time())
+        try:
+            write_json(counter_path(sid), data)
+        except OSError:
+            pass
+
+
+def live_loop() -> None:
+    """Runs while any download does: every LIVE_EVERY seconds one write per
+    share, never one per block."""
+    global live_writer
+    while True:
+        time.sleep(LIVE_EVERY)
+        with transfers_lock:
+            sids = {t.sid for t in transfers}
+            if not sids:
+                live_writer = None
+                return
+        for sid in sids:
+            write_live(sid)
+
+
+def transfer_started(sid: str, total: int) -> Transfer:
+    global live_writer
+    transfer = Transfer(sid, total)
+    with transfers_lock:
+        transfers.add(transfer)
+        if live_writer is None:
+            live_writer = threading.Thread(target=live_loop, name="live-downloads", daemon=True)
+            live_writer.start()
+    return transfer
+
+
+def transfer_ended(transfer: Transfer) -> None:
+    """For any reason — finished, client gone, error. Safe to call twice."""
+    with transfers_lock:
+        if transfer not in transfers:
+            return
+        transfers.discard(transfer)
+        others = any(t.sid == transfer.sid for t in transfers)
+    if not others:
+        write_live(transfer.sid)
 
 
 def hardlink_probe(folder: Path = FILES_DIR) -> Optional[str]:
@@ -1230,6 +1366,67 @@ def hardlink_probe(folder: Path = FILES_DIR) -> Optional[str]:
                 p.unlink()
             except OSError:
                 pass
+
+
+# ---------------------------------------------------------------- Transfer speed
+
+class RateMeter:
+    """Bytes per second over the last few seconds, for the speed shown next to
+    uploads and share downloads. add() is called for every piece that moves, so
+    it only counts and, at most ten times a second, notes the time; the sum is
+    done when someone asks. Callers never hold a lock for it: one thread adds,
+    another may ask, and deque appends and pops are safe for that.
+
+    `widest`: what leaves a server does not leave evenly. Towards a slow
+    client the buffers on the way (ours, the proxy's) refill in steps of
+    megabytes, seconds apart — over a short window the figure would jump
+    between nothing and a multiple. So the window grows, up to `widest`, until
+    it holds enough steps to mean something."""
+
+    STEP = 0.1                           # seconds between two notes
+    ENOUGH = 8                           # notes a window needs before it is believed
+
+    def __init__(self, window: float, widest: Optional[float] = None):
+        self.window = window
+        self.widest = max(window, widest or window)
+        self.total = 0
+        self.samples = deque([(time.monotonic(), 0)], maxlen=1024)
+
+    def add(self, n: int) -> None:
+        now = time.monotonic()
+        last = self.samples[-1][0]
+        if now - last > self.widest:
+            # After a pause (a retry, a resumed upload) the speed starts afresh
+            # instead of averaging over the idle time.
+            self.samples.clear()
+            self.samples.append((now, self.total))
+        self.total += n
+        if now - last >= self.STEP:
+            self.samples.append((now, self.total))
+
+    def rate(self) -> Optional[int]:
+        """None until there is a second to measure; never negative."""
+        now = time.monotonic()
+        samples = list(self.samples)
+        if not samples:                  # cleared by add() this very moment
+            return None
+        window = self.window
+        while window < self.widest and sum(1 for at, _ in samples if at > now - window) < self.ENOUGH:
+            window = min(self.widest, window * 2)
+        base = samples[0]
+        for sample in samples:
+            if sample[0] > now - window:
+                break
+            base = sample
+        try:
+            while len(self.samples) > 1 and self.samples[1][0] <= now - self.widest:
+                self.samples.popleft()       # older than any window: keeps the list short
+        except IndexError:
+            pass
+        span = now - base[0]
+        if span < 1:
+            return None
+        return max(0, int((self.total - base[1]) / span))
 
 
 # ---------------------------------------------------------------- Upload state
@@ -1257,6 +1454,11 @@ class Upload:
         self.active = self.started          # the last time a chunk came in
         self.last_broadcast = 0.0
         self.finishing = False
+        # The speed, for the other devices: what came in over the last five
+        # seconds, while at least one chunk is on its way (streams).
+        self.meter = RateMeter(5.0)
+        self.streams = 0
+        self.flying = 0                  # bytes of the chunks on their way, for the progress shown
         # Two chunks run in parallel and report completion from two thread-pool
         # threads. Without a lock both write the same .tmp file and one of them
         # no longer finds it when renaming.
@@ -1278,6 +1480,12 @@ class Upload:
         if done >= self.total:
             return self.size
         return min(self.size, done * CHUNK_SIZE)
+
+    @property
+    def shown_bytes(self) -> int:
+        """For the progress on the other devices: the chunks that are done plus
+        what has arrived of those on their way, so it moves within a chunk."""
+        return self.received_bytes if self.growing else min(self.size, self.received_bytes + self.flying)
 
     def chunk_length(self, index: int) -> int:
         return max(0, min(CHUNK_SIZE, self.size - index * CHUNK_SIZE))
@@ -1317,8 +1525,9 @@ class Upload:
 
     def as_dict(self) -> dict:
         return {"id": self.id, "name": self.name, "size": self.size,
-                "received": self.received_bytes, "chunks": len(self.chunks),
-                "total": None if self.growing else self.total, "growing": self.growing}
+                "received": self.shown_bytes, "chunks": len(self.chunks),
+                "total": None if self.growing else self.total, "growing": self.growing,
+                "rate": self.meter.rate() if self.streams else None}
 
 
 uploads: Dict[str, Upload] = {}
@@ -1414,16 +1623,37 @@ async def announce_shares() -> None:
         hub.publish_shares(await run_in_threadpool(shares_list))
 
 
-async def watch_shares(interval: int = 15) -> None:
+def counters_stamp():
+    try:
+        st = os.stat(COUNTERS_DIR)
+        return st.st_mtime_ns, st.st_ino
+    except OSError:
+        return None
+
+
+async def watch_shares(interval: int = 15, quick: float = LIVE_EVERY) -> None:
     """Removes what expired or lost its file, and keeps the LAN list current.
     The public container writes the counters but cannot tell anyone, so the LAN
     container looks regularly and only announces actual changes. Expired links
-    are never served either way — every request checks for itself."""
+    are never served either way — every request checks for itself.
+    Every `interval` seconds in general; every `quick` seconds while a share
+    download runs, so its progress moves — and also as soon as counters/ has
+    changed (a counter file is replaced, so the folder's time moves), so a
+    download that starts shows within moments, not after 15 seconds."""
     last = None
+    live = False
+    stamp = counters_stamp()
+    looked = time.monotonic()
     while True:
-        await asyncio.sleep(interval)
+        await asyncio.sleep(quick)
+        now_stamp = counters_stamp()
+        if not live and now_stamp == stamp and time.monotonic() - looked < interval:
+            continue
+        stamp = now_stamp
+        looked = time.monotonic()
         try:
             current = await run_in_threadpool(shares_list)
+            live = any(rec.get("live") for rec in current)
             snapshot = json.dumps(current, sort_keys=True)
             if snapshot != last:
                 if last is not None:
@@ -2871,6 +3101,8 @@ async def upload_chunk(uid: str, index: int, request: Request) -> JSONResponse:
         raise HTTPException(404, "Unknown upload")
 
     written = 0
+    mine = 0                             # this request's share of up.flying
+    up.streams += 1
     try:
         await run_in_threadpool(handle.seek, offset)
         buffer = bytearray()
@@ -2881,18 +3113,36 @@ async def upload_chunk(uid: str, index: int, request: Request) -> JSONResponse:
                 # Never write past this chunk — that would overwrite the next one.
                 raise HTTPException(400, "Chunk larger than expected")
             buffer.extend(piece)
+            up.meter.add(len(piece))
+            up.flying += len(piece)
+            mine += len(piece)
             if len(buffer) >= WRITE_BUFFER:
                 data = bytes(buffer)
                 buffer.clear()
                 await run_in_threadpool(handle.write, data)
                 written += len(data)
+                # A chunk takes a while; the other devices get the speed in between.
+                now = time.time()
+                if now - up.last_broadcast > 2.0:
+                    up.last_broadcast = now
+                    hub.publish("upload", up.as_dict(), up.area)
         if buffer:
             await run_in_threadpool(handle.write, bytes(buffer))
             written += len(buffer)
         await run_in_threadpool(handle.flush)
+    except BaseException:
+        up.flying -= mine                # cut off or refused: its bytes no longer count
+        mine = 0
+        raise
     finally:
+        up.streams -= 1
+        if not up.streams and uploads.get(up.id) is up:
+            # Nothing on its way any more (done, cut off, phone asleep): the
+            # other devices must not keep showing the last speed.
+            hub.publish("upload", up.as_dict(), up.area)
         await run_in_threadpool(handle.close)
 
+    up.flying -= mine                    # from here the chunk counts as done, or not at all
     if expected is not None and written != expected:
         # Cut off on the way (proxy, flaky Wi-Fi): not done, the browser retries.
         raise HTTPException(400, f"Chunk incomplete: {written} of {expected} bytes")
@@ -2984,10 +3234,27 @@ async def download(name: str, request: Request):
     return file_response(path, request, extra={"content-security-policy": "sandbox"})
 
 
+class TrackedStream(StreamingResponse):
+    """A share download that ends its Transfer however the response ends. The
+    generator's own finally does too, but a sync generator left behind by a
+    client that went away is only closed when it is collected; this is sure."""
+
+    def __init__(self, *args, transfer: Transfer, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.transfer = transfer
+
+    async def __call__(self, scope, receive, send) -> None:
+        try:
+            await super().__call__(scope, receive, send)
+        finally:
+            await run_in_threadpool(transfer_ended, self.transfer)
+
+
 def file_response(path: Path, request: Request, extra: Optional[dict] = None,
-                  download_name: Optional[str] = None) -> Response:
+                  download_name: Optional[str] = None, track: Optional[str] = None) -> Response:
     """Delivery with range support — for the drop box and for shares alike, so
-    interrupted downloads can continue."""
+    interrupted downloads can continue. track: the share id, in drop-share,
+    whose running downloads the LAN page shows with progress and speed."""
     size = path.stat().st_size
     start, end, status = 0, max(size - 1, 0), 200
 
@@ -3021,19 +3288,31 @@ def file_response(path: Path, request: Request, extra: Optional[dict] = None,
     if extra:
         headers.update(extra)
 
+    transfer = transfer_started(track, length) if track and PUBLIC and length else None
+
     def reader():
-        with open(path, "rb") as f:
-            f.seek(start)
-            remaining = length
-            while remaining > 0:
-                block = f.read(min(1024 * 1024, remaining))
-                if not block:
-                    break
-                remaining -= len(block)
-                yield block
+        try:
+            with open(path, "rb") as f:
+                f.seek(start)
+                remaining = length
+                while remaining > 0:
+                    block = f.read(min(DOWNLOAD_BLOCK, remaining))
+                    if not block:
+                        break
+                    remaining -= len(block)
+                    yield block
+                    # Counted once the block has been handed on, not before.
+                    if transfer:
+                        transfer.add(len(block))
+        finally:
+            if transfer:
+                transfer_ended(transfer)
 
     # From the extension alone — the rest of a name is the uploader's.
     media = mimetypes.guess_type("file" + Path(name).suffix)[0] or "application/octet-stream"
+    if transfer:
+        return TrackedStream(reader(), status_code=status, headers=headers, media_type=media,
+                             transfer=transfer)
     return StreamingResponse(reader(), status_code=status, headers=headers, media_type=media)
 
 
@@ -3715,7 +3994,9 @@ async def public_download(token: str, request: Request) -> Response:
     path = await run_in_threadpool(shared_file, rec)
     if not path:
         raise HTTPException(404)
-    return file_response(path, request, extra=safe, download_name=rec["name"])
+    # Without it, nginx-based proxies (Nginx Proxy Manager) read up to 1 GB ahead into a temp file.
+    safe["x-accel-buffering"] = "no"
+    return file_response(path, request, extra=safe, download_name=rec["name"], track=rec["id"])
 
 
 # ---------------------------------------------------------------- Start

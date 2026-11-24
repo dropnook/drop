@@ -17,6 +17,8 @@ your own server.
 Something has to leave the house? Share a single file or text through a link
 that expires by itself, optionally with a password. It is served by a second,
 locked-down container — Drop itself is never reachable from the internet.
+While someone downloads a shared file, the list of shares shows how far the
+download is and how fast it runs.
 
 *Drop* is made by [dropnook](https://dropnook.app/). On your devices the page
 calls itself "Tower Drop", after your server.
@@ -41,7 +43,7 @@ calls itself "Tower Drop", after your server.
 
 * Text fields with word, character and link counts; unsaved text survives
   reloads and lost connections.
-* Uploads of any size — resumable, with progress visible to everyone.
+* Uploads of any size — resumable, with progress and speed visible to everyone.
 * The page is called "`<server name>` Drop", with the name read live from Unraid.
 * Screenshots straight from the clipboard with Ctrl+V; pictures with a preview,
   a large view and *Copy* into the clipboard of another computer.
@@ -245,6 +247,11 @@ you. Drop only needs this:
 certificate. As a second line of defence, `drop` refuses every request that
 comes through a proxy or from the internet — even a misconfigured proxy does
 not reach Drop itself.
+
+Downloads from `drop-share` carry `X-Accel-Buffering: no`, so nginx-based
+proxies (Nginx Proxy Manager) pass them on as they come instead of buffering
+them to disk first; that is also what keeps the progress and speed in the list
+of shares true. Nothing to set up for it.
 
 ## HTTPS in your network
 
