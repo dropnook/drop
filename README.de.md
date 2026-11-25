@@ -641,6 +641,6 @@ Wenn Drop dir nützt, kannst du dich mit einer Spende bedanken:
 ---
 
 <sub>Alle Einstellungen, eigenes Image bauen und Releases (auf Englisch):
-[docs/DEVELOPMENT.md](docs/DEVELOPMENT.md). Drop ist freie Software unter der
+[docs/DEVELOPMENT.md](docs/DEVELOPMENT.md). Copyright (c) 2026 Benjamin Müller (dropnook). Drop ist freie Software unter der
 [GNU Affero General Public License v3.0](LICENSE); der Name Dropnook™ gehört
 nicht zu dieser Lizenz — siehe [TRADEMARKS.md](TRADEMARKS.md).</sub>
